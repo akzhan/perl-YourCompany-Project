@@ -25,3 +25,17 @@ prove t -r
 ```bash
 script/plint lib
 ```
+
+## REPL
+
+```bash
+script/re.pl
+```
+
+## pgcli
+
+Install [pgcli](http://pgcli.com).
+
+```bash
+script/pgcli
+```
