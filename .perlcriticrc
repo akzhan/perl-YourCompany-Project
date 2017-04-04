@@ -1,0 +1,14 @@
+include = BuiltinFunctions::ProhibitBooleanGrep BuiltinFunctions::ProhibitStringyEval BuiltinFunctions::ProhibitStringySplit BuiltinFunctions::ProhibitUniversalCan BuiltinFunctions::ProhibitUniversalIsa ClassHierarchies::ProhibitExplicitISA CodeLayout::ProhibitHardTabs ControlStructures::ProhibitMutatingListFunctions ControlStructures::ProhibitUnreachableCode ErrorHandling::RequireCarping InputOutput::ProhibitBarewordFileHandles InputOutput::RequireCheckedClose InputOutput::RequireCheckedOpen InputOutput::RequireCheckedSyscalls InputOutput::ProhibitInteractiveTest InputOutput::ProhibitOneArgSelect InputOutput::ProhibitTwoArgOpen Miscellanea::ProhibitFormats Modules::ProhibitEvilModules Modules::RequireEndWithOne Objects::ProhibitIndirectSyntax Policy::TestingAndDebugging::RequireUseStrict Policy::TestingAndDebugging::RequireUseWarnings RegularExpressions::ProhibitCaptureWithoutTest Subroutines::ProhibitBuiltinHomonyms Subroutines::ProhibitReturnSort Subroutines::ProhibitSubroutinePrototypes Subroutines::ProhibitUnusedPrivateSubroutines Subroutines::ProtectPrivateSubs TestingAndDebugging::ProhibitNoStrict TestingAndDebugging::ProhibitProlongedStrictureOverride TestingAndDebugging::RequireUseStrict TestingAndDebugging:;ProhibitNoWarnings ValuesAndExpressions::ProhibitCommaSeparatedStatements ValuesAndExpressions::ProhibitLeadingZeros ValuesAndExpressions::ProhibitMagicNumbers ValuesAndExpressions::ProhibitMismatchedOperators ValuesAndExpressions::ProhibitMixedBooleanOperators Variables::ProhibitPerl4PackageNames Variables::ProhibitUnusedVariables Variables::ProtectPrivateVars Variables::RequireInitializationForLocalVars Variables::RequireLexicalLoopIterators Variables::RequireLocalizedPunctuationVars
+
+[TestingAndDebugging::RequireUseStrict]
+equivalent_modules = YourCompany::Perl::UTF8 YourCompany::Test::UTF8
+
+[TestingAndDebugging::RequireUseWarnings]
+equivalent_modules = YourCompany::Perl::UTF8 YourCompany::Test::UTF8
+
+[ValuesAndExpressions::ProhibitMagicNumbers]
+allowed_values = 0 1
+
+[-Subroutines::ProhibitExplicitReturnUndef]
+
+[-Subroutines::RequireFinalReturn]

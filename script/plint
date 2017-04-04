@@ -1,0 +1,81 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+use feature 'say';
+
+use File::Find qw( find );
+use File::Basename qw( dirname );
+use Perl::Critic ();
+use Data::Dump qw( dump );
+
+my $SCRIPT_PATH = $0;
+while ( -l $SCRIPT_PATH ) {
+    $SCRIPT_PATH = readlink $SCRIPT_PATH;
+}
+
+my $BASE_FOLDER = dirname( $SCRIPT_PATH ). '/..';
+
+my $LIB = "$BASE_FOLDER/lib";
+
+my $lib = $ENV{PERL5LIB};
+$lib = $lib ? "$lib:" : '';
+$lib .= "$LIB";
+$ENV{PERL5LIB} = $lib;
+
+my $error_count = 0;
+my @files = ();
+my $linter = Perl::Critic->new(
+    -profile => "$BASE_FOLDER/.perlcriticrc",
+);
+
+Perl::Critic::Violation::set_format( "%f:%L\t%m\n\t%r" );
+
+find({
+    no_chdir => 1,
+    wanted => sub {
+        my $file_name = $File::Find::name;
+
+        return  if $file_name !~ m/ \. (?: pm | pl | t ) $ /x;
+        return  unless -f $file_name;
+        return  unless -r $file_name;
+
+        push @files, $file_name;
+    },
+}, @ARGV);
+
+sub test_compile {
+    my $file_name = shift;
+
+    my $exec_result = system( qw( /usr/bin/env perl -c ), $file_name );
+
+    $error_count++  if $exec_result;
+}
+
+sub test_lint {
+    my @violations = $linter->critique( shift );
+
+    say $_ for @violations;
+
+    $error_count += scalar( @violations );
+}
+
+sub test_associated_test {
+    my $file_name = shift;
+    return  unless $file_name =~ s/\.pm$/.t/;
+    $file_name = 't/'. $file_name;
+    unless ( -e $file_name ) {
+        print STDERR "No associated $file_name test exists\n";
+        return;
+    }
+
+    my $exec_result = system( qw( /usr/bin/env prove -f ), $file_name );
+
+    $error_count++  if $exec_result;
+}
+
+test_compile $_ for ( @files );
+test_lint $_ for ( @files );
+test_associated_test $_ for ( @files );
+
+exit $error_count;
