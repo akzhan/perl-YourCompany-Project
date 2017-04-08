@@ -1,19 +1,7 @@
 use YourCompany::Test::UTF8;
 
 {
-    package Plack::AsStringError;
-
-    use Mojo::Base -base;
-
-    use HTTP::Status qw( HTTP_BAD_REQUEST );
-
-    sub code { HTTP_BAD_REQUEST }
-
-    sub as_string { "an err" }
-}
-
-{
-    package Plack::GenericError;
+    package Plack::AnotherError;
 
     use Mojo::Base -base;
 
@@ -46,7 +34,7 @@ describe "YourCompany::Plugin::Common" => sub {
     };
 
     describe "reply.exception" => sub {
-        it "renders json with error on our plack error" => sub {
+        it "should render json with error on our plack error" => sub {
             $c->reply->exception( YourCompany::Plack::Error->new( code => HTTP_NOT_FOUND, messages => ["err"] ) );
             my $json = decode_json( $c->res->body );
             is_deeply $json, {
@@ -57,20 +45,13 @@ describe "YourCompany::Plugin::Common" => sub {
             is $c->res->code, HTTP_NOT_FOUND;
         };
 
-        it "renders json with error on as string plack error" => sub {
-            $c->reply->exception( Plack::AsStringError->new );
-            is $c->res->body, "an err";
-            is $c->res->code, HTTP_BAD_REQUEST;
+        it "should rethrow on Plack::Middleware::HTTPExceptions friendly error" => sub {
+            throws_ok {
+                $c->reply->exception( Plack::AnotherError->new );
+            } "Plack::AnotherError";
         };
 
-
-        it "renders json with error on stringified plack error" => sub {
-            $c->reply->exception( Plack::GenericError->new );
-            is $c->res->body, "an err";
-            is $c->res->code, HTTP_NOT_FOUND;
-        };
-
-        it "renders json with internal server error on another die" => sub {
+        it "should render json with internal server error on generic error" => sub {
             $c->reply->exception( "hm" );
             my $json = decode_json( $c->res->body );
             is_deeply $json, {

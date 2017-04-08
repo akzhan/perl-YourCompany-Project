@@ -60,12 +60,8 @@ sub register {
                 return $c->render( $exception->to_render );
             }
 
-            if ( $exception->can("code") ) {
-                if ( $exception->can("as_string") ) {
-                    return $c->render( status => $exception->code, text => $exception->as_string );
-                }
-
-                return $c->render( status => $exception->code, text => "$exception" );
+            if ( $exception->can("as_psgi") || $exception->can("code") ) {
+                die $exception; # delegate handling up to middleware
             }
         }
 
