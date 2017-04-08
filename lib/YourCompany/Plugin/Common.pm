@@ -1,5 +1,45 @@
 package YourCompany::Plugin::Common;
 
+=encoding utf-8
+
+=head1 NAME
+
+YourCompany::Plugin::Common
+
+=head1 DESCRIPTION
+
+This plugin provides L<Mojolicious> hooks to allow common JSON API's behavior.
+
+=head1 SYNOPSYS
+
+    package MyApp;
+
+    use Mojo::Base qw( Mojolicious );
+
+    # This method will run once at server start
+    sub startup {
+        my $self = shift;
+
+        $self->plugin('YourCompany::Plugin::Common');
+    }
+
+    # ...and somewhere
+
+    use YourCompany::Plack::Error;
+    use HTTP::Status qw( HTTP_BAD_REQUEST );
+
+    YourCompany::Plack::Error->throw( HTTP_BAD_REQUEST, "Bad args!" );
+
+=head1 SEE ALSO
+
+=over
+
+=item * L<YourCompany::Plack::Error>.
+
+=back
+
+=cut
+
 use YourCompany::Perl::UTF8;
 
 use HTTP::Status qw( HTTP_BAD_REQUEST HTTP_INTERNAL_SERVER_ERROR );
