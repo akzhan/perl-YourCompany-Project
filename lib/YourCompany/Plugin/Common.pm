@@ -15,8 +15,18 @@ sub register {
     $app->helper( 'reply.exception' => sub {
         my ( $c, $exception ) = @_;
 
-        if ( blessed($exception) && $exception->isa( 'YourCompany::Plack::Error' ) ) {
-            return $c->render( $exception->to_render )
+        if ( blessed($exception) ) {
+            if ( $exception->isa( 'YourCompany::Plack::Error' ) ) {
+                return $c->render( $exception->to_render );
+            }
+
+            if ( $exception->can("code") ) {
+                if ( $exception->can("as_string") ) {
+                    return $c->render( status => $exception->code, text => $exception->as_string );
+                }
+
+                return $c->render( status => $exception->code, text => "$exception" );
+            }
         }
 
         return $c->render( status => HTTP_INTERNAL_SERVER_ERROR, json => {

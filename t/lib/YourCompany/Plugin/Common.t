@@ -1,6 +1,30 @@
 use YourCompany::Test::UTF8;
 
-use HTTP::Status qw( HTTP_INTERNAL_SERVER_ERROR HTTP_NOT_FOUND );
+{
+    package Plack::AsStringError;
+
+    use Mojo::Base -base;
+
+    use HTTP::Status qw( HTTP_BAD_REQUEST );
+
+    sub code { HTTP_BAD_REQUEST }
+
+    sub as_string { "an err" }
+}
+
+{
+    package Plack::GenericError;
+
+    use Mojo::Base -base;
+
+    use HTTP::Status qw( HTTP_NOT_FOUND );
+
+    use overload '""' => sub { "an err" };
+
+    sub code { HTTP_NOT_FOUND }
+}
+
+use HTTP::Status qw( HTTP_INTERNAL_SERVER_ERROR HTTP_NOT_FOUND HTTP_BAD_REQUEST );
 use Mojolicious;
 use Mojo::JSON qw( decode_json );
 use Test::Mojo;
@@ -22,7 +46,7 @@ describe "YourCompany::Plugin::Common" => sub {
     };
 
     describe "reply.exception" => sub {
-        it "renders json with error on plack error" => sub {
+        it "renders json with error on our plack error" => sub {
             $c->reply->exception( YourCompany::Plack::Error->new( code => HTTP_NOT_FOUND, messages => ["err"] ) );
             my $json = decode_json( $c->res->body );
             is_deeply $json, {
@@ -30,6 +54,19 @@ describe "YourCompany::Plugin::Common" => sub {
                 status  => HTTP_NOT_FOUND,
                 success => \0,
             };
+            is $c->res->code, HTTP_NOT_FOUND;
+        };
+
+        it "renders json with error on as string plack error" => sub {
+            $c->reply->exception( Plack::AsStringError->new );
+            is $c->res->body, "an err";
+            is $c->res->code, HTTP_BAD_REQUEST;
+        };
+
+
+        it "renders json with error on stringified plack error" => sub {
+            $c->reply->exception( Plack::GenericError->new );
+            is $c->res->body, "an err";
             is $c->res->code, HTTP_NOT_FOUND;
         };
 
