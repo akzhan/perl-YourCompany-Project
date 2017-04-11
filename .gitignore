@@ -1,4 +1,5 @@
 /perl-YourCompany-Project.sublime-workspace
 *.sw?
 pod2htmd.tmp
+.vstags
 

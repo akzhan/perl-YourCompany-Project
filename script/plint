@@ -6,15 +6,19 @@ use feature 'say';
 
 use File::Find qw( find );
 use File::Basename qw( dirname );
+use File::Spec ();
 use Perl::Critic ();
 use Data::Dump qw( dump );
+use Cwd qw( abs_path );
 
 my $SCRIPT_PATH = $0;
 while ( -l $SCRIPT_PATH ) {
+    my $dir = dirname( $SCRIPT_PATH );
     $SCRIPT_PATH = readlink $SCRIPT_PATH;
+    $SCRIPT_PATH = File::Spec->rel2abs( $SCRIPT_PATH, $dir );
 }
 
-my $BASE_FOLDER = dirname( $SCRIPT_PATH ). '/..';
+my $BASE_FOLDER = abs_path( dirname( $SCRIPT_PATH ). '/..' );
 
 my $LIB = "$BASE_FOLDER/lib";
 

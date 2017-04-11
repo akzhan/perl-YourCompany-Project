@@ -14,6 +14,8 @@ requires "Scalar::Util";
 
 # Mojo based Perl project
 requires "Mojolicious" => "7.30";
+requires "Mojolicious::Plugin::Model";
+requires "Starman";
 
 on test => sub {
     requires "Test::More";

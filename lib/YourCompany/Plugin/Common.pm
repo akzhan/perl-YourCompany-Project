@@ -61,7 +61,8 @@ sub register {
             }
 
             if ( $exception->can("as_psgi") || $exception->can("code") ) {
-                die $exception; # delegate handling up to middleware
+                # delegate handling up to middleware
+                die $exception; ## no critic (ErrorHandling::RequireCarping)
             }
         }
 
