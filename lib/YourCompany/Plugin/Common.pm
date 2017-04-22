@@ -55,6 +55,9 @@ sub register {
     $app->helper( 'reply.exception' => sub {
         my ( $c, $exception ) = @_;
 
+        # just log error
+        $app->log->error( "$exception" );
+
         if ( blessed($exception) ) {
             if ( $exception->isa( 'YourCompany::Plack::Error' ) ) {
                 return $c->render( $exception->to_render );

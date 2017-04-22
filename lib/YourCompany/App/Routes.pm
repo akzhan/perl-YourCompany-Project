@@ -8,7 +8,10 @@ sub collect {
     my $projects = $routes->any('/projects')->to( controller => 'project' );
 
     $projects->get('/')->to('#index');
-    $projects->get('/:id' => [ id => qr/\d+/ ])->to('#single');
+    $projects->get( '/:id' => [ id => qr/\d+/ ] )->to('#single');
+    $projects->post('/')->to('#create');
+    $projects->put( '/:id' => [ id => qr/\d+/ ] )->to('#update');
+    $projects->delete( '/:id' => [ id => qr/\d+/ ] )->to('#delete');
 }
 
 1;

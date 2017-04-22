@@ -9,8 +9,6 @@ use parent 'YourCompany::App::Controller';
 sub index { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
     my ( $self ) = @_;
 
-warn 'fuck';
-
     return $self->render( json => {
         success => \1,
         status  => HTTP_OK,
@@ -27,6 +25,44 @@ sub single { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
         success => \1,
         status  => HTTP_OK,
         model   => $self->model('Project')->single($id),
+    } );
+}
+
+sub create {
+    my ( $self ) = @_;
+
+    my $fields = $self->req->json;
+
+    return $self->render( json => {
+        success => \1,
+        status  => HTTP_CREATED,
+        model   => $self->model('Project')->create($fields),
+    } );
+}
+
+sub update {
+    my ( $self ) = @_;
+
+    my $id     = ''. $self->param('id');
+    my $fields = $self->req->json;
+
+    return $self->render( json => {
+        success => \1,
+        status  => HTTP_OK,
+        model   => $self->model('Project')->update( $id, $fields ),
+    } );
+}
+
+sub delete { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
+    my ( $self ) = @_;
+
+    my $id = ''. $self->param('id');
+
+    $self->model('Project')->delete($id);
+
+    return $self->render( json => {
+        success => \1,
+        status  => HTTP_OK,
     } );
 }
 
