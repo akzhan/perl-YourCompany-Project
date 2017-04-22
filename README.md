@@ -31,6 +31,19 @@ postgres => \q
 
 and as usualy do "[sqitch](http://sqitch.org/) deploy".
 
+By default, Sqitch will read sqitch.conf in the current directory for settings. But it will also read ~/.sqitch/sqitch.conf for user-specific settings. Get it from git and setup.
+
+```bash
+sqitch config --user user.name 'user_login'
+sqitch config --user user.email 'email@example.com'
+```
+
+You should correctly set Git line endings - we use Unix ones.
+
+```
+git config --global core.autocrlf input
+```
+
 ## Run
 
 ```bash
