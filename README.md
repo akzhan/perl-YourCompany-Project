@@ -88,3 +88,4 @@ bin/pgcli
 ## CREDITS
 
  * Database plan to [Max Travinichev](mailto:uatrigger@gmail.com) [@travinichev](https://github.com/travinichev).
+ * Mojolicious application to [Vladimir Melnichenko](mailto:melnichenkovv@gmail.com).
