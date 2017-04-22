@@ -12,7 +12,11 @@ sub startup {
 
     # Documentation browser under "/perldoc"
     $self->plugin('PODRenderer');
-    $self->plugin('Model');
+    $self->plugin('Model' => {
+        namespaces => [
+            'YourCompany::Model',
+        ],
+    });
     $self->plugin('YourCompany::Plugin::Common');
 
     $self->secrets(['yourcompany']);

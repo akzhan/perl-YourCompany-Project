@@ -1,3 +1,5 @@
 ---
 database:
   name: yourdatabase
+  user: yourself
+  password: secured
