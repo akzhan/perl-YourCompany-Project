@@ -44,35 +44,47 @@ You should correctly set Git line endings - we use Unix ones.
 git config --global core.autocrlf input
 ```
 
-## Run
+## Usage
+
+### Run
 
 ```bash
 bin/http # to run HTTP server
 bin/cli routes # mojo cli
 ```
 
-## Unit tests
+### Unit tests
 
 ```bash
 prove t -r
 ```
 
-## Critique
+### Critique
 
 ```bash
-script/plint lib
+bin/plint lib
 ```
 
-## REPL
+### REPL
 
 ```bash
-script/re.pl
+bin/re.pl
 ```
 
-## pgcli
+### psql
+
+```bash
+bin/psql
+```
+
+### pgcli
 
 Install [pgcli](http://pgcli.com).
 
 ```bash
-script/pgcli
+bin/pgcli
 ```
+
+## CREDITS
+
+ * Database plan to [Max Travinichev](mailto:uatrigger@gmail.com) [@travinichev](https://github.com/travinichev).

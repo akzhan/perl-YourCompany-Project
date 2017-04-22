@@ -15,7 +15,7 @@ requires "Scalar::Util";
 # Postgres!
 requires "DBD::Pg";
 requires "DBIx::Class";
-requires "App::Sqitch";
+requires "App::Sqitch" => "0.9994";
 
 # Mojo based Perl project
 requires "Mojolicious" => "7.30";
