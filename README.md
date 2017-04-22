@@ -31,6 +31,12 @@ postgres => \q
 
 and as usualy do "[sqitch](http://sqitch.org/) deploy".
 
+## Run
+
+```bash
+bin/http # to run HTTP server
+bin/cli routes # mojo cli
+```
 
 ## Unit tests
 
