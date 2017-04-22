@@ -1,0 +1,190 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "YourCompany Project API",
+        "description": "YourCompany Project API server.",
+        "version": "0.0.1"
+    },
+    "host": "yourcompany.local",
+    "basePath": "/api",
+    "schemes": [ "http" ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "responses": {
+        "generic": {
+            "description": "Generic",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "status": {
+                        "type": "integer",
+                        "default": 200
+                    }
+                },
+                "required": ["success", "status"]
+            },
+            "examples": {
+                "application/json": "{\"success\":true,\"status\":200}"
+            }
+        },
+        "default": {
+            "description": "Error",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "status": {
+                        "type": "integer",
+                        "default": 500
+                    }
+                },
+                "required": ["success", "errors", "status"]
+            },
+            "examples": {
+                "application/json": "{\"success\":false,\"status\": 404,\"errors\":[\"Not found\"]}"
+            }
+        },
+        "Project": {
+            "description": "Project response",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "success": { "type": "boolean", "default": true },
+                    "status": { "type": "integer", "default": 200 },
+                    "project": {
+                        "$ref": "#/definitions/Project"
+                    }
+                }
+            }
+        },
+        "Projects": {
+            "description": "Projects response",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "success": { "type": "boolean", "default": true },
+                    "status": { "type": "integer", "default": 200 },
+                    "projects": {
+                        "type": "array",
+                        "items": { "$ref": "#/definitions/Project" }
+                    }
+                }
+            }
+        }
+    },
+    "paths": {
+        "/projects": {
+            "get" : {
+                "tags" : [ "projects" ],
+                "x-controller" : "Project",
+                "x-action": "index",
+                "responses" : {
+                    "200": {
+                        "$ref": "#/responses/Projects"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            },
+            "post" : {
+                "tags" : [ "projects" ],
+                "x-controller" : "Project",
+                "x-action": "create",
+                "parameters" : [
+                    { "in": "body", "name": "body", "schema": { "$ref" : "#/definitions/Project" } }
+                ],
+                "responses" : {
+                    "200": {
+                        "$ref": "#/responses/Project"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        },
+        "/projects/{id}": {
+            "get" : {
+                "tags" : [ "projects" ],
+                "x-controller" : "Project",
+                "x-action": "single",
+                "parameters" : [
+                    { "in": "path", "name": "id", "required": true, "type" : "integer" }
+                ],
+                "responses" : {
+                    "200": {
+                        "$ref": "#/responses/Project"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            },
+            "delete" : {
+                "tags" : [ "projects" ],
+                "x-controller" : "Project",
+                "x-action": "delete",
+                "parameters" : [
+                    { "in": "path", "name": "id", "required": true, "type" : "integer" }
+                ],
+                "responses" : {
+                    "200": {
+                        "$ref": "#/responses/generic"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            },
+            "put" : {
+                "tags" : [ "projects" ],
+                "x-controller" : "Project",
+                "x-action": "update",
+                "parameters" : [
+                    { "in": "path", "name": "id", "required": true, "type" : "integer" },
+                    { "in": "body", "name": "body", "schema": { "type" : "object" } }
+                ],
+                "responses" : {
+                    "200": {
+                        "$ref": "#/responses/Project"
+                    },
+                    "default": {
+                        "$ref": "#/responses/default"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Project": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": ["title"]
+        }
+    }
+}
