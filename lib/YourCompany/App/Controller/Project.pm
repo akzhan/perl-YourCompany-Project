@@ -37,7 +37,7 @@ sub create {
         success => \1,
         status  => HTTP_CREATED,
         model   => $self->model('Project')->create($fields),
-    } );
+    }, status => HTTP_CREATED );
 }
 
 sub update {
