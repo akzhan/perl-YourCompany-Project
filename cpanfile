@@ -1,16 +1,18 @@
-requires "perl" => 5.020_003;
+requires "perl" => 5.020_002;
 
+requires "Cwd";
 requires "Data::Dump";
 requires "JSON::XS";
+requires "Hash::Merge";
 requires "HTTP::Status";
 requires "File::Basename";
 requires "File::Spec";
 requires "File::Find";
 requires "File::Slurper";
 requires "List::Util" => "1.33";
-requires "lib::abs" => "0.93";
-
 requires "Scalar::Util";
+requires "YAML::Syck";
+requires "lib::abs" => "0.93";
 
 # Postgres!
 requires "DBD::Pg";
