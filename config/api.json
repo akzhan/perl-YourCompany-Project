@@ -112,7 +112,7 @@
                     { "in": "body", "name": "body", "schema": { "$ref" : "#/definitions/Project" } }
                 ],
                 "responses" : {
-                    "200": {
+                    "201": {
                         "$ref": "#/responses/Project"
                     },
                     "default": {
