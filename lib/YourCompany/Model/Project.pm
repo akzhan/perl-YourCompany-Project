@@ -2,8 +2,6 @@ package YourCompany::Model::Project;
 
 use YourCompany::Perl::UTF8;
 
-use HTTP::Status qw( HTTP_NOT_FOUND HTTP_BAD_REQUEST );
-
 use YourCompany::DB;
 use YourCompany::Plack::Error;
 

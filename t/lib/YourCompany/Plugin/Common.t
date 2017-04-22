@@ -12,7 +12,6 @@ use YourCompany::Test::UTF8;
     sub code { HTTP_NOT_FOUND }
 }
 
-use HTTP::Status qw( HTTP_INTERNAL_SERVER_ERROR HTTP_NOT_FOUND HTTP_BAD_REQUEST );
 use Mojolicious;
 use Mojo::JSON qw( decode_json );
 use Test::Mojo;

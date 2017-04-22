@@ -26,7 +26,6 @@ This plugin provides L<Mojolicious> hooks to allow common JSON API's behavior.
     # ...and somewhere
 
     use YourCompany::Plack::Error;
-    use HTTP::Status qw( HTTP_BAD_REQUEST );
 
     YourCompany::Plack::Error->throw( HTTP_BAD_REQUEST, "Bad args!" );
 
@@ -42,7 +41,6 @@ This plugin provides L<Mojolicious> hooks to allow common JSON API's behavior.
 
 use YourCompany::Perl::UTF8;
 
-use HTTP::Status qw( HTTP_BAD_REQUEST HTTP_INTERNAL_SERVER_ERROR );
 use Scalar::Util qw( blessed );
 
 use Mojo::Base 'Mojolicious::Plugin';

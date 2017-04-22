@@ -19,6 +19,7 @@ use YourCompany::Perl::UTF8;
 use HTTP::Status qw( HTTP_INTERNAL_SERVER_ERROR );
 use Scalar::Util qw( blessed );
 use JSON::XS qw( encode_json );
+use Exporter ();
 
 use overload '""' => 'stringify';
 use overload 'ne' => 'not_equal';
@@ -99,6 +100,18 @@ sub throw {
         code     => $code,
         messages => [ @messages ],
     );
+}
+
+=head2 import
+
+Exports L<HTTP::Status> constants in turn.
+
+=cut
+
+sub import {
+    my $callpkg = caller;
+    Exporter::export_to_level( 'HTTP::Status', 1, $callpkg, ':constants' );
+    1;
 }
 
 1;
