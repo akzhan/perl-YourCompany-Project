@@ -12,6 +12,11 @@ requires "lib::abs" => "0.93";
 
 requires "Scalar::Util";
 
+# Postgres!
+requires "DBD::Pg";
+requires "DBIx::Class";
+requires "App::Sqitch";
+
 # Mojo based Perl project
 requires "Mojolicious" => "7.30";
 requires "Mojolicious::Plugin::Model";
