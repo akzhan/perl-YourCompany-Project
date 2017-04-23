@@ -9,7 +9,22 @@
             "isTestCommand": true,
             "isShellCommand": true,
             "args": ["-r", "t"],
-            "showOutput": "always"
+            "showOutput": "always",
+            "problemMatcher": {
+                "owner": "perl",
+                "fileLocation": "relative",
+                "pattern": [
+                    {
+                        "regexp": "^#\\s+Failed test '(.+)'",
+                        "message": 1
+                    },
+                    {
+                        "regexp": "^#\\s+at (\\S+) line (\\d+).",
+                        "file": 1,
+                        "line": 2
+                    }
+                ]
+            }
         }
-    ],
+    ]
 }
