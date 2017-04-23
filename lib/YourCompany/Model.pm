@@ -16,14 +16,29 @@ use Mojo::Base 'MojoX::Model';
 use YourCompany::Perl::UTF8;
 
 use YourCompany::Plack::Error;
+use YourCompany::DB;
 
 =head1 METHODS
+
+=head2 txn_do
+
+    $model->txn_do(sub {
+        # do in transaction block
+    });
+
+Shortcut for L<DBIx::Class::Schema/txn_do>.
+
+=cut
+
+sub txn_do( $, $block, @args ) {
+    return YourCompany::DB->txn_do($block, @args);
+}
 
 =head2 rs
 
     $model->rs
 
-Gets corresponding L<DBIx::Class> result set.
+Gets corresponding L<DBIx::Class::Schema/resultset>.
 
 =cut
 
@@ -46,7 +61,7 @@ See also: L</rs>.
 sub find_or_throw( $self, $id ) {
     my $entity_name = ( ref($self) =~ s/^.+:://r );
 
-    return YourCompany::DB->txn_do(sub {
+    return $self->txn_do(sub {
         my $record = $self->rs->search({
             id => $id,
         })->single;
