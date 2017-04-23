@@ -39,8 +39,7 @@ BEGIN {
 
     no strict 'refs'; ## no critic (TestingAndDebugging::ProhibitNoStrict)
     for my $http_code ( grep { m/^HTTP_/ } @HTTP::Status::EXPORT_OK ) {
-        my $sub_name = lc( $http_code );
-        $sub_name =~ s/^http_//;
+        my $sub_name = ( $http_code =~ s/^HTTP_(.+)/\L$1\E/r );
         *{"$my_class\::$sub_name"} = sub {
             my $class = shift;
             $class->throw( "HTTP::Status::$http_code"->(), @_);
