@@ -6,9 +6,7 @@ use HTTP::Status qw( HTTP_OK HTTP_CREATED );
 
 use parent 'YourCompany::App::Controller';
 
-sub index { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
-    my ( $self ) = @_;
-
+sub index( $self ) { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
     return $self->render( json => {
         success => \1,
         status  => HTTP_OK,
@@ -16,9 +14,7 @@ sub index { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
     } );
 }
 
-sub single { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
-    my ( $self ) = @_;
-
+sub single( $self ) { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
     my $id = ''. $self->param('id');
 
     return $self->render( json => {
@@ -28,9 +24,7 @@ sub single { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
     } );
 }
 
-sub create {
-    my ( $self ) = @_;
-
+sub create( $self ) {
     my $fields = $self->req->json;
 
     return $self->render( json => {
@@ -40,9 +34,7 @@ sub create {
     }, status => HTTP_CREATED );
 }
 
-sub update {
-    my ( $self ) = @_;
-
+sub update( $self ) {
     my $id     = ''. $self->param('id');
     my $fields = $self->req->json;
 
@@ -53,9 +45,7 @@ sub update {
     } );
 }
 
-sub delete { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
-    my ( $self ) = @_;
-
+sub delete( $self ) { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
     my $id = ''. $self->param('id');
 
     $self->model('Project')->delete($id);

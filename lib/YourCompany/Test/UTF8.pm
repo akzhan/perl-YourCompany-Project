@@ -12,8 +12,7 @@ binmode $builder->output,         ":encoding(UTF-8)";
 binmode $builder->failure_output, ":encoding(UTF-8)";
 binmode $builder->todo_output,    ":encoding(UTF-8)";
 
-sub import {
-    my $class = shift;
+sub import( $class ) {
     my $callpkg = caller;
 
     YourCompany::Perl::UTF8->import;

@@ -12,31 +12,29 @@ L<Plack::Middleware::HTTPExceptions> friendly exception class.
 
 Has code and messages, but returns errors instead of messages in JSON.
 
+Additionaly this class exports all L<HTTP::Status> constants.
+
 =cut
 
+use Mojo::Base -base;
 use YourCompany::Perl::UTF8;
 
 use HTTP::Status qw( HTTP_INTERNAL_SERVER_ERROR );
 use Scalar::Util qw( blessed );
-use JSON::XS qw( encode_json );
+use Mojo::JSON qw( encode_json false );
 use Exporter ();
 
 use overload '""' => 'stringify';
 use overload 'ne' => 'not_equal';
 use overload 'eq' => 'equal';
 
-# Mojo implementation
-
-use Mojo::Base -base;
-
 has code  => HTTP_INTERNAL_SERVER_ERROR; # name to meet Plack::Middleware::HTTPExceptions
 
 has messages => sub { return []; };
 
-sub message {
-    my $self = shift;
-    if ( $_[0] ) {
-        push @{ $self->messages }, $_[0];
+sub message( $self, @values ) {
+    if ( scalar @values ) {
+        push @{ $self->messages }, @values;
         return $self;
     }
     return $self->stringify();
@@ -44,47 +42,42 @@ sub message {
 
 sub stringify {
     my $self = shift;
+
     return join("\n", @{ $self->messages });
 }
 
 sub not_equal {
     my ( $x, $y ) = @_;
+
     return ref($x) ne ref($y) || "$x" ne "$y";
 }
 
 sub equal {
     my ( $x, $y ) = @_;
+
     return ref($x) eq ref($y) && "$x" eq "$y";
 }
 
-sub TO_JSON {
-    my $self = shift;
-
+sub TO_JSON( $self ) {
     return {
-        success => \0,
+        success => false,
         status  => $self->code,
         errors  => $self->messages,
     };
 }
 
-sub to_render {
-    my $self = shift;
-
+sub to_render( $self ) {
     return (
         json    => $self->TO_JSON,
         status  => $self->code,
     );
 }
 
-sub as_string { # to meet Plack::Middleware::HTTPExceptions
-    my $self = shift;
-
+sub as_string( $self ) { # to meet Plack::Middleware::HTTPExceptions
     return encode_json( $self->TO_JSON() );
 }
 
-sub throw {
-    my ( $class, $code, @messages ) = @_;
-
+sub throw( $class, $code, @messages ) {
     if ( blessed($code) && $code->isa(__PACKAGE__) ) {
         # we got Error
         die $code; ## no critic (ErrorHandling::RequireCarping)
@@ -93,7 +86,7 @@ sub throw {
     unless ( scalar( @messages ) ) {
         # we got only message
         @messages = ( "$code" );
-        $code  = HTTP_INTERNAL_SERVER_ERROR;
+        $code     = HTTP_INTERNAL_SERVER_ERROR;
     }
 
     die $class->new( ## no critic (ErrorHandling::RequireCarping)

@@ -39,17 +39,14 @@ This plugin provides L<Mojolicious> hooks to allow common JSON API's behavior.
 
 =cut
 
+use Mojo::Base 'Mojolicious::Plugin';
 use YourCompany::Perl::UTF8;
 
 use Scalar::Util qw( blessed );
 
-use Mojo::Base 'Mojolicious::Plugin';
-
 use YourCompany::Plack::Error;
 
-sub register {
-    my ( $self, $app ) = @_;
-
+sub register( $self, $app, @args ) {
     $app->helper( 'reply.exception' => sub {
         my ( $c, $exception ) = @_;
 

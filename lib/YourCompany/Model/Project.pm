@@ -7,7 +7,7 @@ use YourCompany::Plack::Error;
 
 use parent qw( YourCompany::Model );
 
-sub list {
+sub list( $self ) {
     return YourCompany::DB->txn_do(sub {
         return [
             YourCompany::DB->rs('Project')->all,
@@ -15,8 +15,7 @@ sub list {
     });
 }
 
-sub single {
-    my ( $self, $id ) = @_;
+sub single( $self, $id ) {
     return YourCompany::DB->txn_do(sub {
         my $project = YourCompany::DB->rs('Project')->search({
             id => $id,
@@ -29,8 +28,7 @@ sub single {
     });
 }
 
-sub create {
-    my ( $self, $fields ) = @_;
+sub create( $self, $fields ) {
     delete $fields->{id}; # No id allowed on create
     return YourCompany::DB->txn_do(sub {
         my $project = YourCompany::DB->rs('Project')->create($fields);
@@ -40,8 +38,7 @@ sub create {
     });
 }
 
-sub update {
-    my ( $self, $id, $fields ) = @_;
+sub update( $self, $id, $fields ) {
     return YourCompany::DB->txn_do(sub {
         my $project = YourCompany::DB->rs('Project')->search({
             id => $id,
@@ -62,8 +59,7 @@ sub update {
     });
 }
 
-sub delete { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
-    my ( $self, $id ) = @_;
+sub delete( $self, $id ) { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
     return YourCompany::DB->txn_do(sub {
         my $project = YourCompany::DB->rs('Project')->search({
             id => $id,

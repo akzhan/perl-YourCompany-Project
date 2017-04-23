@@ -38,11 +38,11 @@ use IO::File   ();
 use IO::Handle ();
 
 sub import {
-    my ($class) = @_;
-
     strict->import;
     warnings->import( FATAL => 'all' );
     feature->import(':5.20');
+    feature->import('signatures');
+    warnings->unimport('experimental::signatures');
     utf8->import;
 
     mro::set_mro( scalar caller(), 'c3' );
@@ -51,6 +51,7 @@ sub import {
 ## no critic (Subroutines::ProhibitBuiltinHomonyms)
 sub unimport {
     utf8->unimport;
+    warnings->import('experimental::signatures');
     feature->unimport;
     warnings->unimport;
     strict->unimport;

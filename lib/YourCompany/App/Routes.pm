@@ -2,9 +2,7 @@ package YourCompany::App::Routes;
 
 use YourCompany::Perl::UTF8;
 
-sub collect {
-    my ( $class, $routes ) = @_;
-
+sub collect( $class, $routes ) {
     my $projects = $routes->any('/projects')->to( controller => 'project' );
 
     $projects->get('/')->to('#index');

@@ -1,15 +1,12 @@
 package YourCompany::App;
 
-use YourCompany::Perl::UTF8;
-
 use Mojo::Base qw( Mojolicious );
+use YourCompany::Perl::UTF8;
 
 use YourCompany::App::Routes;
 
 # This method will run once at server start
-sub startup {
-    my $self = shift;
-
+sub startup( $self ) {
     # Documentation browser under "/perldoc"
     $self->plugin('PODRenderer');
 
