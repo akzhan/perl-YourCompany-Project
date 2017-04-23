@@ -63,7 +63,7 @@ sub find_or_throw( $self, $id ) {
 
     return $self->txn_do(sub {
         my $record = $self->rs->search({
-            id => $id,
+            'me.id' => $id,
         })->single;
 
         YourCompany::Plack::Error->not_found( "$entity_name not found: $id" )
