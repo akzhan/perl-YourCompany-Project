@@ -93,8 +93,7 @@
         "/projects": {
             "get" : {
                 "tags" : [ "projects" ],
-                "x-controller" : "Project",
-                "x-action": "index",
+                "x-mojo-to" : "api-project#index",
                 "responses" : {
                     "200": {
                         "$ref": "#/responses/Projects"
@@ -106,8 +105,7 @@
             },
             "post" : {
                 "tags" : [ "projects" ],
-                "x-controller" : "Project",
-                "x-action": "create",
+                "x-mojo-to" : "api-project#create",
                 "parameters" : [
                     { "in": "body", "name": "body", "schema": { "$ref" : "#/definitions/Project" } }
                 ],
@@ -124,8 +122,7 @@
         "/projects/{id}": {
             "get" : {
                 "tags" : [ "projects" ],
-                "x-controller" : "Project",
-                "x-action": "single",
+                "x-mojo-to" : "api-project#single",
                 "parameters" : [
                     { "in": "path", "name": "id", "required": true, "type" : "integer" }
                 ],
@@ -140,8 +137,7 @@
             },
             "delete" : {
                 "tags" : [ "projects" ],
-                "x-controller" : "Project",
-                "x-action": "delete",
+                "x-mojo-to" : "api-project#delete",
                 "parameters" : [
                     { "in": "path", "name": "id", "required": true, "type" : "integer" }
                 ],
@@ -156,8 +152,7 @@
             },
             "put" : {
                 "tags" : [ "projects" ],
-                "x-controller" : "Project",
-                "x-action": "update",
+                "x-mojo-to" : "api-project#update",
                 "parameters" : [
                     { "in": "path", "name": "id", "required": true, "type" : "integer" },
                     { "in": "body", "name": "body", "schema": { "type" : "object" } }

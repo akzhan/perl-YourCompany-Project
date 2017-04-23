@@ -12,11 +12,17 @@ sub startup {
 
     # Documentation browser under "/perldoc"
     $self->plugin('PODRenderer');
+
     $self->plugin('Model' => {
         namespaces => [
             'YourCompany::Model',
         ],
     });
+
+    $self->plugin('OpenAPI' => {
+        url => $self->home->rel_file("config/api.json"),
+    });
+
     $self->plugin('YourCompany::Plugin::Common');
 
     $self->secrets(['yourcompany']);
