@@ -1,11 +1,32 @@
 package YourCompany::App;
 
+=encoding utf-8
+
+=head1 NAME
+
+YourCompany::App
+
+=head1 DESCRIPTION
+
+YourCompany Web Application.
+
+=cut
+
 use Mojo::Base qw( Mojolicious );
 use YourCompany::Perl::UTF8;
 
 use YourCompany::App::Routes;
 
-# This method will run once at server start
+=head1 METHODS
+
+=head2 startup
+
+    $app->startup;
+
+This method will run once at server start
+
+=cut
+
 sub startup( $self ) {
     # Documentation browser under "/perldoc"
     $self->plugin('PODRenderer');
