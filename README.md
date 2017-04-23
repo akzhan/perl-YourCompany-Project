@@ -103,3 +103,4 @@ and open [swagger page](http://localhost:7777/swagger-ui/dist/index.html).
 
  * Database plan to [Max Travinichev](mailto:uatrigger@gmail.com) [@travinichev](https://github.com/travinichev).
  * Mojolicious application to [Vladimir Melnichenko](mailto:melnichenkovv@gmail.com).
+ * find or throw pattern to Eugen Konkov [@KES777](https://github.com/KES777).
