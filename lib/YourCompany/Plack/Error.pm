@@ -12,7 +12,9 @@ L<Plack::Middleware::HTTPExceptions> friendly exception class.
 
 Has code and messages, but returns errors instead of messages in JSON.
 
-Additionaly this class exports all L<HTTP::Status> constants.
+Additionally this class exports all L<HTTP::Status> constants.
+
+Provides shortcuts like C<not_found> to L</throw> errors using error code.
 
 =cut
 
