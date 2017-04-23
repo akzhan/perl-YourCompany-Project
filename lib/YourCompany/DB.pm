@@ -11,7 +11,7 @@ __PACKAGE__->load_classes();
 my $schema = undef;
 my $work_pid = 0;
 
-sub instance() {
+sub instance {
     my $pid = $$;
     if ( $work_pid != $pid ) {
         $schema = undef;
@@ -26,15 +26,15 @@ sub instance() {
     );
 }
 
-sub rs( $self, @args ) {
+sub rs( $, @args ) {
     return instance()->resultset(@args);
 }
 
-sub txn_do( $self, $block, @args ) {
+sub txn_do( $, $block, @args ) {
     return instance()->storage->txn_do($block, @args);
 }
 
-sub dbh_do( $self, $block, @args ) {
+sub dbh_do( $, $block, @args ) {
     return instance()->storage->dbh_do($block, @args);
 }
 
