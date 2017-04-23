@@ -1,0 +1,3 @@
+[submodule "public/swagger-ui"]
+	path = public/swagger-ui
+	url = https://github.com/akzhan/perl-YourCompany-Project-public-swagger-ui.git
