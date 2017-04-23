@@ -85,6 +85,20 @@ Install [pgcli](http://pgcli.com).
 bin/pgcli
 ```
 
+## Swagger UI
+
+YourCompany Project supports [OpenAPI](https://www.openapis.org/) and allows to visualize and interact with the API’s resources
+through [Swagger UI](http://swagger.io/swagger-ui/).
+
+Simply do
+
+```bash
+git submodule update --init
+bin/http
+```
+
+and open [swagger page](http://localhost:7777/swagger-ui/dist/index.html).
+
 ## CREDITS
 
  * Database plan to [Max Travinichev](mailto:uatrigger@gmail.com) [@travinichev](https://github.com/travinichev).
