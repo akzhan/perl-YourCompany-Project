@@ -15,11 +15,11 @@
                 "fileLocation": "relative",
                 "pattern": [
                     {
-                        "regexp": "^#\\s+Failed test '(.+)'",
+                        "regexp": "^#\\s{3}(.+)$",
                         "message": 1
                     },
                     {
-                        "regexp": "^#\\s+at (\\S+) line (\\d+).",
+                        "regexp": "^#\\s{3,}at (\\S+) line (\\d+).",
                         "file": 1,
                         "line": 2
                     }
