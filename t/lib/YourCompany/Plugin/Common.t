@@ -15,6 +15,7 @@ use YourCompany::Test::UTF8;
 use Mojolicious;
 use Mojo::JSON qw( decode_json );
 use Test::Mojo;
+use HTTP::Status qw( HTTP_NOT_FOUND HTTP_INTERNAL_SERVER_ERROR );
 
 use YourCompany::Plack::Error;
 

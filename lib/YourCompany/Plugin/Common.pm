@@ -42,6 +42,7 @@ This plugin provides L<Mojolicious> hooks to allow common JSON API's behavior.
 use Mojo::Base 'Mojolicious::Plugin';
 use YourCompany::Perl::UTF8;
 
+use HTTP::Status qw( HTTP_INTERNAL_SERVER_ERROR );
 use Scalar::Util qw( blessed );
 
 use YourCompany::Plack::Error;
