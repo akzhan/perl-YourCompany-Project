@@ -12,4 +12,8 @@ sub TO_JSON( $self ) {
     };
 }
 
+sub refresh ( $self, $options = {} ) {
+    $self->discard_changes;
+}
+
 1;

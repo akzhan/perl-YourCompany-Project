@@ -32,7 +32,7 @@ sub create( $self, $fields ) {
     delete $fields->{id}; # No id allowed on create
     return YourCompany::DB->txn_do(sub {
         my $project = YourCompany::DB->rs('Project')->create($fields);
-        $project->discard_changes;
+        $project->refresh;
 
         return $project;
     });
@@ -53,7 +53,7 @@ sub update( $self, $id, $fields ) {
         }
 
         $project->update($fields);
-        $project->discard_changes;
+        $project->refresh;
 
         return $project;
     });
