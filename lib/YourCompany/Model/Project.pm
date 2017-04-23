@@ -47,7 +47,7 @@ sub create( $self, $fields ) {
 
 sub update( $self, $id, $fields ) {
     return YourCompany::DB->txn_do(sub {
-         if ( exists($fields->{id}) && ( $fields->{id} != $id ) ) {
+        if ( exists($fields->{id}) && ( $fields->{id} != $id ) ) {
             YourCompany::Plack::Error->bad_request( "Project cannot change id from ". $fields->{id}. " to  $id" );
         }
 
