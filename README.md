@@ -1,4 +1,4 @@
-# YourCompany Project in Perl
+# YourCompany Project in Perl [![Build Status](https://travis-ci.org/akzhan/perl-YourCompany-Project.png?branch=master)](https://travis-ci.org/akzhan/perl-YourCompany-Project)
 
 ## Installation
 
