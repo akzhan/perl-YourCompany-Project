@@ -32,6 +32,21 @@ has code  => HTTP_INTERNAL_SERVER_ERROR; # name to meet Plack::Middleware::HTTPE
 
 has messages => sub { return []; };
 
+BEGIN {
+    my $my_class = __PACKAGE__;
+
+    no strict 'refs'; ## no critic (TestingAndDebugging::ProhibitNoStrict)
+    for my $http_code ( grep { m/^HTTP_/ } @HTTP::Status::EXPORT_OK ) {
+        my $sub_name = lc( $http_code );
+        $sub_name =~ s/^http_//;
+        *{"$my_class\::$sub_name"} = sub {
+            my $class = shift;
+            $class->throw( "HTTP::Status::$http_code"->(), @_);
+        };
+    }
+    use strict 'refs';
+}
+
 sub message( $self, @values ) {
     if ( scalar @values ) {
         push @{ $self->messages }, @values;

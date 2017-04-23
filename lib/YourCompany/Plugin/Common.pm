@@ -27,7 +27,7 @@ This plugin provides L<Mojolicious> hooks to allow common JSON API's behavior.
 
     use YourCompany::Plack::Error;
 
-    YourCompany::Plack::Error->throw( HTTP_BAD_REQUEST, "Bad args!" );
+    YourCompany::Plack::Error->bad_request( "Bad args!" );
 
 =head1 SEE ALSO
 

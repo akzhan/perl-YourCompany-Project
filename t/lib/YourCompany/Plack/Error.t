@@ -89,6 +89,26 @@ describe "YourCompany::Plack::Error" => sub {
             is_deeply $err->messages, [ "1" ];
         };
     };
+
+
+    describe not_found => sub {
+        my $err;
+
+        it "dies" => sub {
+            throws_ok {
+                YourCompany::Plack::Error->not_found("wow");
+            } "YourCompany::Plack::Error", "";
+            $err = $@;
+        };
+
+        it "with HTTP_NOT_FOUND code" => sub {
+            is $err->code, HTTP_NOT_FOUND;
+        };
+
+        it "and expected message" => sub {
+            is $err->message, "wow";
+        };
+    };
 };
 
 runtests  unless caller;
