@@ -15,23 +15,10 @@ sub list( $self ) {
     });
 }
 
-sub _find_or_throw( $self, $id ) {
-    return YourCompany::DB->txn_do(sub {
-        my $project = YourCompany::DB->rs('Project')->search({
-            id => $id,
-        })->single;
-
-        YourCompany::Plack::Error->not_found( "Project not found: $id" )
-            unless $project;
-
-        return $project;
-    });
-}
-
 sub single( $self, $id ) {
     # explicit transaction is unnecessary here, but for solid expirience
     return YourCompany::DB->txn_do(sub {
-        $self->_find_or_throw( $id );
+        $self->find_or_throw( $id );
     });
 }
 
@@ -51,7 +38,7 @@ sub update( $self, $id, $fields ) {
             YourCompany::Plack::Error->bad_request( "Project cannot change id from ". $fields->{id}. " to  $id" );
         }
 
-        my $project = $self->_find_or_throw( $id );
+        my $project = $self->find_or_throw( $id );
         $project->update($fields);
         $project->refresh;
 
@@ -61,7 +48,7 @@ sub update( $self, $id, $fields ) {
 
 sub delete( $self, $id ) { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
     return YourCompany::DB->txn_do(sub {
-        my $project = $self->_find_or_throw( $id );
+        my $project = $self->find_or_throw( $id );
 
         $project->delete;
 
