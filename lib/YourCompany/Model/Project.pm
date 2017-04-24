@@ -12,6 +12,6 @@ use YourCompany::Perl::UTF8;
 
 use YourCompany::Plack::Error;
 
-use parent qw( YourCompany::Model );
+use parent qw( YourCompany::RestModel );
 
 1;
