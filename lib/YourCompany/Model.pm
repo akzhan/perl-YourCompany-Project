@@ -12,8 +12,9 @@ Base L<MojoX::Model> class.
 
 =cut
 
-use Mojo::Base 'MojoX::Model';
 use YourCompany::Perl::UTF8;
+
+use parent 'MojoX::Model';
 
 use YourCompany::Plack::Error;
 use YourCompany::DB;
@@ -21,6 +22,8 @@ use YourCompany::DB;
 =head1 METHODS
 
 =head2 resultset_name
+
+    $model->resultset_name;
 
 Returns associated resultset name.
 
@@ -35,7 +38,7 @@ sub resultset_name( $self ) {
 =head2 txn_do
 
     $model->txn_do(sub {
-        # do in transaction block
+        # do it in transaction block
     });
 
 Shortcut for L<DBIx::Class::Schema/txn_do>.
@@ -48,21 +51,25 @@ sub txn_do( $, $block, @args ) {
 
 =head2 rs
 
-    $model->rs
+    $model->rs;
 
-Gets corresponding L<DBIx::Class::Schema/resultset>.
+    $model->rs('ResultSet');
+
+Gets corresponding or default L<DBIx::Class::Schema/resultset>.
 
 See also L</resultset_name>.
 
 =cut
 
-sub rs ( $self ) {
-    return YourCompany::DB->rs($self->resultset_name);
+sub rs ( $self, $resultset_name = undef ) {
+    return YourCompany::DB->rs( $resultset_name // $self->resultset_name );
 }
 
 =head2 find_or_throw
 
     $model->find_or_throw( $id )
+
+    $model->find_or_throw( $id, { prefetch => 'dependent' } )
 
 Gets record by $id or throw L<YourCompany::Plack::Error> C<not_found> error.
 
@@ -70,15 +77,13 @@ See also: L</rs>.
 
 =cut
 
-sub find_or_throw( $self, $id ) {
-    my $entity_name = ( ref($self) =~ s/^.+:://r );
-
+sub find_or_throw( $self, $id, $attr = {} ) {
     return $self->txn_do(sub {
         my $record = $self->rs->search({
             'me.id' => $id,
-        })->single;
+        }, $attr)->single;
 
-        YourCompany::Plack::Error->not_found( "$entity_name not found: $id" )
+        YourCompany::Plack::Error->not_found( $self->resultset_name. " not found: $id" )
             unless $record;
 
         return $record;
