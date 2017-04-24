@@ -15,12 +15,10 @@ sub index( $self ) { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
 }
 
 sub single( $self ) { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
-    my $id = ''. $self->param('id');
-
     return $self->render( json => {
         success => \1,
         status  => HTTP_OK,
-        model   => $self->model->single($id),
+        model   => $self->model->single,
     } );
 }
 
@@ -35,20 +33,17 @@ sub create( $self ) {
 }
 
 sub update( $self ) {
-    my $id     = ''. $self->param('id');
     my $fields = $self->req->json;
 
     return $self->render( json => {
         success => \1,
         status  => HTTP_OK,
-        model   => $self->model->update( $id, $fields ),
+        model   => $self->model->update( $fields ),
     } );
 }
 
 sub delete( $self ) { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
-    my $id = ''. $self->param('id');
-
-    $self->model->delete($id);
+    $self->model->delete();
 
     return $self->render( json => {
         success => \1,
