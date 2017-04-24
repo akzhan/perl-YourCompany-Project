@@ -8,18 +8,18 @@ use HTTP::Status qw( HTTP_OK );
 use YourCompany::App;
 use YourCompany::Plack::Error;
 
+my $t;
+
+sub json {
+    $t->tx->res->json;
+}
+
 describe "YourCompany::App::Controller::Project" => sub {
-    my ( $t );
-
-    before all => sub {
-        use_ok "YourCompany::App::Controller::Project";
-    };
-
-    before each => sub {
-        $t = Test::Mojo->new('YourCompany::App');
-    };
-
     describe "list" => sub {
+        before all => sub {
+            $t = Test::Mojo->new('YourCompany::App');
+        };
+
         it "should render json" => sub {
             $t->get_ok('/projects')
                 ->status_is(HTTP_OK)
@@ -27,6 +27,10 @@ describe "YourCompany::App::Controller::Project" => sub {
                 ->json_is("/success", Mojo::JSON::true)
                 ->json_has("/model")
                 ;
+        };
+
+        it "has array as model" => sub {
+            isa_ok json->{model}, 'ARRAY';
         };
     };
 };

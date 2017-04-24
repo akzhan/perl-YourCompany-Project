@@ -27,7 +27,7 @@ requires "Starman";
 
 on test => sub {
     requires "Test::More";
-    requires "Test::Exception";
+    requires "Test::Exception" => "0.43";
     requires "Test::Spec";
 };
 

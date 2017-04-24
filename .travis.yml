@@ -12,4 +12,5 @@ dist: trusty
 before_script:
   - psql -c "CREATE DATABASE yourdatabase ENCODING=utf8;" -U postgres
   - cp config/travis.yml config/local.yml
+  - sqitch deploy --target travis
 script: prove -r t
