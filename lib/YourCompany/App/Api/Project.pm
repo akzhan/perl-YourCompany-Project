@@ -13,7 +13,7 @@ sub index { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
     return $self->render( openapi => {
         success => true,
         status  => HTTP_OK,
-        model   => $self->model('Project')->list(),
+        model   => $self->model->list(),
     } );
 }
 
@@ -25,7 +25,7 @@ sub single { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
     return $self->render( openapi => {
         success => true,
         status  => HTTP_OK,
-        model   => $self->model('Project')->single($id),
+        model   => $self->model->single($id),
     } );
 }
 
@@ -37,7 +37,7 @@ sub create {
     return $self->render( openapi => {
         success => true,
         status  => HTTP_CREATED,
-        model   => $self->model('Project')->create($fields),
+        model   => $self->model->create($fields),
     }, status => HTTP_CREATED );
 }
 
@@ -50,7 +50,7 @@ sub update {
     return $self->render( openapi => {
         success => true,
         status  => HTTP_OK,
-        model   => $self->model('Project')->update( $id, $fields ),
+        model   => $self->model->update( $id, $fields ),
     } );
 }
 
@@ -59,7 +59,7 @@ sub delete { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
 
     my $id     = $self->validation->param("id");
 
-    $self->model('Project')->delete($id);
+    $self->model->delete($id);
 
     return $self->render( openapi => {
         success => true,

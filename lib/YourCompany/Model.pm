@@ -20,6 +20,18 @@ use YourCompany::DB;
 
 =head1 METHODS
 
+=head2 resultset_name
+
+Returns associated resultset name.
+
+Its last part of model class name by default.
+
+=cut
+
+sub resultset_name( $self ) {
+    return ( ref($self) =~ s/^.+:://r );
+}
+
 =head2 txn_do
 
     $model->txn_do(sub {
@@ -40,12 +52,12 @@ sub txn_do( $, $block, @args ) {
 
 Gets corresponding L<DBIx::Class::Schema/resultset>.
 
+See also L</resultset_name>.
+
 =cut
 
 sub rs ( $self ) {
-    my $entity_name = ( ref($self) =~ s/^.+:://r );
-
-    return YourCompany::DB->rs($entity_name);
+    return YourCompany::DB->rs($self->resultset_name);
 }
 
 =head2 find_or_throw
