@@ -4,10 +4,10 @@ use YourCompany::Perl::UTF8;
 use YourCompany::Plack::Error;
 
 sub setup_finder( $class, $routes ) {
-    $routes->add_shortcut( finder => sub($r, $ename, $prop_name = 'id') {
+    $routes->add_shortcut( finder => sub($r, $model_name, $prop_name = 'id') {
         return $r->under( "/:$prop_name" => [ $prop_name => qr/\d+/ ] => sub($c) {
-            my $model = $c->model($ename)
-                or YourCompany::Plack::Error->throw("Model '$ename' not found");
+            my $model = $c->model($model_name)
+                or YourCompany::Plack::Error->throw("Model '$model_name' not found");
 
             $c->stash( model => $model->finder( $c->param($prop_name) ) );
 
