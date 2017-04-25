@@ -16,7 +16,7 @@ cpanm --installdeps --with-develop .
 
 ## Database
 
-Note that our installation uses Postgres 9.6.
+Note that our boilerplate depends on Postgres (travis build requires Postgres  9.6).
 
 You should create user and database.
 
@@ -27,7 +27,7 @@ postgres => CREATE DATABASE yourdatabase OWNER=yourself ENCODING=utf8;
 postgres => \q
 ```
 
-and as usualy do "[sqitch](http://sqitch.org/) deploy".
+and, as usually, do "[sqitch](http://sqitch.org/) deploy".
 
 By default, Sqitch will read sqitch.conf in the current directory for settings. But it will also read ~/.sqitch/sqitch.conf for user-specific settings. Get it from git and setup.
 
@@ -95,7 +95,7 @@ git submodule update --init
 bin/http
 ```
 
-and open [swagger page](http://localhost:7777/swagger-ui/dist/index.html).
+and open [its swagger page](http://localhost:7777/swagger-ui/dist/index.html).
 
 ## CREDITS
 
