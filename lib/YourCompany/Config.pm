@@ -8,7 +8,8 @@ use Hash::Merge qw( merge );
 use YAML::Syck qw( LoadFile );
 
 sub _loader {
-    local $YAML::Syck::ImplicitTyping = 1;
+    local $YAML::Syck::ImplicitTyping  = 1;
+    local $YAML::Syck::ImplicitUnicode = 1;
 
     my $BASE_DIR = abs_path( dirname( __FILE__ ). "/../.." );
 
