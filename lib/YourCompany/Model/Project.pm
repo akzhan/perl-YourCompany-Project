@@ -12,7 +12,7 @@ use YourCompany::Perl::UTF8;
 
 use YourCompany::Plack::Error;
 
-use parent qw( YourCompany::Model );
+use parent qw( YourCompany::DBModel );
 
 sub list( $self ) {
     return $self->txn_do(sub {
