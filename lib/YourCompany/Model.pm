@@ -18,4 +18,8 @@ use parent 'MojoX::Model';
 
 use YourCompany::Plack::Error;
 
+sub log( $self ) {
+    return $self->app->log;
+}
+
 1;
