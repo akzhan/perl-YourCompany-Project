@@ -1,5 +1,29 @@
 package YourCompany::Config;
 
+=encoding utf-8
+
+=head1 NAME
+
+YourCompany::Config
+
+=head1 DESCRIPTION
+
+YourCompany Project configuration based on C<YAML> format.
+
+It reads I<config/defaults.yml> and override some settings with I<config/local.yml>.
+
+All root sections available through C<YourCompany::Config-E<gt>$section> property accessor.
+
+Root available as C<YourCompany::Config-E<gt>all>.
+
+=head1 SYNOPSYS
+
+    use YourCompany::Config;
+
+    say YourCompany::Config->database->{name};
+
+=cut
+
 use YourCompany::Perl::UTF8;
 
 use Cwd qw( abs_path );
