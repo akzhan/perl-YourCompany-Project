@@ -1,5 +1,11 @@
 # YourCompany Project in Perl [![Build Status](https://travis-ci.org/akzhan/perl-YourCompany-Project.png?branch=master)](https://travis-ci.org/akzhan/perl-YourCompany-Project)
 
+Modern Web project in Perl using [Mojolicious](http://mojolicious.org/) and [DBIx::Class](http://search.cpan.org/~ribasushi/DBIx-Class).
+
+"/api" route also provides implementation of [OpenAPI](https://www.openapis.org/) protocol.
+
+Some configuration settings like database ones embedded to reduce the learning curve.
+
 ## Installation
 
 Requirements:
@@ -16,7 +22,7 @@ cpanm --installdeps --with-develop .
 
 ## Database
 
-Note that our boilerplate depends on Postgres (travis build requires Postgres  9.6).
+Note that our boilerplate depends on Postgres 9.5+.
 
 You should create user and database.
 
@@ -36,11 +42,9 @@ sqitch config --user user.name 'user_login'
 sqitch config --user user.email 'email@example.com'
 ```
 
-You should correctly set Git line endings - we use Unix ones.
+## Configuration
 
-```
-git config --global core.autocrlf input
-```
+Usually You need to override *config/defaults.yml* with *config/local.yml* and exclude latest from VCS tracking.
 
 ## Usage
 
