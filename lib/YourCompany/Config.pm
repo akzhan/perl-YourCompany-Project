@@ -29,7 +29,7 @@ use YourCompany::Perl::UTF8;
 
 use Cwd qw( abs_path );
 use File::Basename qw( dirname );
-use Hash::Merge qw( merge );
+use Hash::Merge ();
 use YAML::Syck qw( LoadFile );
 
 sub _loader( $, $mode ) {
@@ -47,13 +47,13 @@ sub _loader( $, $mode ) {
             mode => $mode,
         },
     };
-    Hash::Merge::set_behavior( 'RIGHT_PRECEDENT' );
+    my $merger = Hash::Merge->new( 'RIGHT_PRECEDENT' );
     for (@files_to_merge) {
         my $file_name = "$BASE_DIR/config/$_.yml";
         next  unless -r $file_name;
         my $to_merge = LoadFile( $file_name );
 
-        $config = merge( $config, $to_merge );
+        $config = $merger->merge( $config, $to_merge );
     }
 
     # per process setup

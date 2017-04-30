@@ -6,3 +6,7 @@ app:
   port: 7777
   workers: 1
   backlog: 128
+database:
+  name: yourdatabase
+  user: yourself
+  password: secured

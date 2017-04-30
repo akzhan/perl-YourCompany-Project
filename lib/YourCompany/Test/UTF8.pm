@@ -3,7 +3,6 @@ package YourCompany::Test::UTF8;
 use mro ();
 use YourCompany::Perl::UTF8;
 
-require Test::More;
 require Test::Spec;
 require Test::Exception;
 

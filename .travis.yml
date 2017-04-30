@@ -1,4 +1,5 @@
 sudo: false
+dist: trusty
 language: perl
 perl:
   - "5.20"
@@ -8,9 +9,10 @@ services:
   - postgresql
 addons:
   postgresql: "9.6"
-dist: trusty
 before_script:
   - psql -c "CREATE DATABASE yourdatabase ENCODING=utf8;" -U postgres
   - cp config/travis.yml config/local.yml
   - sqitch deploy --target travis
+env:
+  - MOJO_MODE=travis
 script: prove -r t
