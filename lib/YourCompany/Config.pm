@@ -77,15 +77,11 @@ sub _setup( $class ) {
     };
     use strict 'refs';
 
-    return $config;
+    return 1;
 }
 
 sub import( $class, @ ) {
-    state $did_setup = 0;
-    unless ( $did_setup ) {
-        $did_setup = 1;
-        $class->_setup;
-    }
+    state $did_setup = $class->_setup;
 }
 
 1;
