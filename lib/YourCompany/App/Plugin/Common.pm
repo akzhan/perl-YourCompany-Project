@@ -1,10 +1,10 @@
-package YourCompany::Plugin::Common;
+package YourCompany::App::Plugin::Common;
 
 =encoding utf-8
 
 =head1 NAME
 
-YourCompany::Plugin::Common
+YourCompany::App::Plugin::Common
 
 =head1 DESCRIPTION
 
@@ -20,7 +20,7 @@ This plugin provides L<Mojolicious> hooks to allow common JSON API's behavior.
     sub startup {
         my $self = shift;
 
-        $self->plugin('YourCompany::Plugin::Common');
+        $self->plugin('YourCompany::App::Plugin::Common');
     }
 
     # ...and somewhere

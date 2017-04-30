@@ -42,7 +42,7 @@ sub startup( $self ) {
         url => $self->home->rel_file("config/api.json"),
     });
 
-    $self->plugin('YourCompany::Plugin::Common');
+    $self->plugin('YourCompany::App::Plugin::Common');
 
     $self->secrets(['yourcompany']);
 

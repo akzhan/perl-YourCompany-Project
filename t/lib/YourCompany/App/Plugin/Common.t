@@ -19,17 +19,17 @@ use HTTP::Status qw( HTTP_NOT_FOUND HTTP_INTERNAL_SERVER_ERROR );
 
 use YourCompany::Plack::Error;
 
-describe "YourCompany::Plugin::Common" => sub {
+describe "YourCompany::App::Plugin::Common" => sub {
     my ( $t, $c );
 
     before all => sub {
-        use_ok "YourCompany::Plugin::Common";
+        use_ok "YourCompany::App::Plugin::Common";
     };
 
     before each => sub {
         $t = Test::Mojo->new;
         $t->app(Mojolicious->new);
-        $t->app->plugin( "YourCompany::Plugin::Common" );
+        $t->app->plugin( "YourCompany::App::Plugin::Common" );
         $c = $t->app->build_controller;
     };
 
