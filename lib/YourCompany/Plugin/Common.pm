@@ -45,9 +45,14 @@ use YourCompany::Perl::UTF8;
 use HTTP::Status qw( HTTP_INTERNAL_SERVER_ERROR );
 use Scalar::Util qw( blessed );
 
+use YourCompany::Config;
 use YourCompany::Plack::Error;
 
 sub register( $self, $app, @args ) {
+    $app->defaults( config => YourCompany::Config->all );
+    $app->config( YourCompany::Config->all );
+
+    # Exception handling
     $app->helper( 'reply.exception' => sub {
         my ( $c, $exception ) = @_;
 

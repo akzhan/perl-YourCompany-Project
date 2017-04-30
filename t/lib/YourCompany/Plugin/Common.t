@@ -33,6 +33,18 @@ describe "YourCompany::Plugin::Common" => sub {
         $c = $t->app->build_controller;
     };
 
+    describe "app.defaults" => sub {
+        they "should be loaded" => sub {
+            ok $t->app->defaults('config')->{defaults}{loaded};
+        };
+    };
+
+    describe "app.config" => sub {
+        it "should be loaded" => sub {
+            ok $t->app->config->{defaults}{loaded};
+        };
+    };
+
     describe "reply.exception" => sub {
         it "should render json with error on our plack error" => sub {
             $c->reply->exception( YourCompany::Plack::Error->new( code => HTTP_NOT_FOUND, messages => ["err"] ) );
