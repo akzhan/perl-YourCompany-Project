@@ -15,6 +15,7 @@ YourCompany Web Application.
 use Mojo::Base qw( Mojolicious );
 use YourCompany::Perl::UTF8;
 
+use YourCompany::Config;
 use YourCompany::App::Routes;
 
 =head1 METHODS

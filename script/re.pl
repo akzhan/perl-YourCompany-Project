@@ -9,6 +9,8 @@ use YourCompany::Perl::UTF8;
 
 use Devel::REPL;
 
+use YourCompany::Config;
+
 my $repl = Devel::REPL->new;
 $repl->load_plugin($_) for qw(
 	History LexEnv Completion

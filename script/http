@@ -8,14 +8,6 @@ use File::Spec ();
 use Cwd qw( abs_path );
 use open ':std', ':encoding(UTF-8)';
 
-use constant {
-    DEFAULT_HOST        => 'localhost',
-    DEFAULT_PORT        => 7777,
-    DEFAULT_WORKERS     => 1,
-    DEFAULT_BACKLOG     => 128,
-    DEFAULT_ENVIRONMENT => 'development',
-};
-
 my $SCRIPT_PATH;
 
 BEGIN {
@@ -30,21 +22,21 @@ BEGIN {
 
 use lib qw( lib );
 
+use YourCompany::Config;
+
 my $BASE_FOLDER = abs_path( dirname( $SCRIPT_PATH ). '/..' );
 
 $ENV{MOJO_REVERSE_PROXY} = 1;
 
-my $appcfg = {};
-
 exec(
     "/usr/bin/env",
     "starman",
-    "-E", ( $appcfg->{environment} || DEFAULT_ENVIRONMENT ),
+    "-E", YourCompany::Config->app->{mode},
     "--preload-app",
     "-Ilib",
-    "--listen", ( $appcfg->{host} || DEFAULT_HOST ). ":". ( $appcfg->{port} || DEFAULT_PORT ),
-    "--workers", ( $appcfg->{workers} || DEFAULT_WORKERS ),
-    "--backlog", ( $appcfg->{backlog} || DEFAULT_BACKLOG ),
+    "--listen", YourCompany::Config->app->{host}. ":". YourCompany::Config->app->{port},
+    "--workers", YourCompany::Config->app->{workers},
+    "--backlog", YourCompany::Config->app->{backlog},
     "--disable-proctitle",
     "script/http.pl",
 );

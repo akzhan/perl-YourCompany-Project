@@ -15,6 +15,7 @@ use YourCompany::Plack::Error;
 use parent qw( YourCompany::DBModel );
 
 sub list( $self ) {
+    $self->log->info('woe');
     return $self->txn_do(sub {
         return [
             $self->rs->all,

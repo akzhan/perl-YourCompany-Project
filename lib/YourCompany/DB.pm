@@ -14,7 +14,7 @@ Application database schema.
 
 use YourCompany::Perl::UTF8;
 
-use YourCompany::Config ();
+use YourCompany::Config;
 
 use parent 'DBIx::Class::Schema';
 
