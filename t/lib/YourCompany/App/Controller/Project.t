@@ -106,7 +106,7 @@ describe "YourCompany::App::Controller::Project" => sub {
                 $t->get_ok("/projects/$new_id")
                     ->status_is(HTTP_NOT_FOUND)
                     ->json_is("/status", HTTP_NOT_FOUND)
-                    ->json_is("/success", Mojo::JSON::false)
+                    ->json_is("/success", false)
                     ->json_has("/errors")
                     ->json_hasnt("/model")
                     ;
