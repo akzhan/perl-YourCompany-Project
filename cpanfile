@@ -10,6 +10,7 @@ requires "File::Spec";
 requires "File::Find";
 requires "File::Slurper";
 requires "List::Util" => "1.33";
+requires "Readonly";
 requires "Scalar::Util";
 requires "YAML::Syck";
 requires "lib::abs" => "0.93";
