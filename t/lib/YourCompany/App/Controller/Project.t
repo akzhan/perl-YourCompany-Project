@@ -10,7 +10,7 @@ use YourCompany::App;
 use YourCompany::DB;
 use YourCompany::Plack::Error;
 
-Readonly my $WRONG_ID => 0;
+Readonly my $WRONG_ID       => 0;
 Readonly my $ACCEPT_HEADERS => { Accept => 'application/json' };
 
 describe "YourCompany::App::Controller::Project" => sub {
@@ -37,7 +37,8 @@ describe "YourCompany::App::Controller::Project" => sub {
                     status  => HTTP_OK,
                     success => true,
                     model   => [],
-                });
+                })
+                ;
         };
     };
 
@@ -61,7 +62,7 @@ describe "YourCompany::App::Controller::Project" => sub {
             it "should create project with unique title" => sub {
                 $t->post_ok("/projects" => $ACCEPT_HEADERS => json => {
                     title => $new_title,
-                })->status_is(HTTP_CREATED)
+                })  ->status_is(HTTP_CREATED)
                     ->json_is("/status", HTTP_CREATED)
                     ->json_is("/success", true)
                     ->json_hasnt("/errors")
@@ -95,7 +96,8 @@ describe "YourCompany::App::Controller::Project" => sub {
                     ->json_is({
                         status  => HTTP_OK,
                         success => true,
-                    });
+                    })
+                    ;
             };
         };
 
