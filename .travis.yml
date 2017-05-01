@@ -1,5 +1,7 @@
 sudo: false
 dist: trusty
+git:
+  submodules: false # doesn't need 'em for tests
 language: perl
 perl:
   - "5.20"
