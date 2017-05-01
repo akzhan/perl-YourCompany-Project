@@ -74,8 +74,52 @@ Equivalent to calling L<DBIx::Class::Storage/txn_do>.
 
 =cut
 
-sub txn_do( $, $block, @args ) {
-    return instance()->storage->txn_do($block, @args);
+# Executes $coderef with (optional) arguments @coderef_args atomically, returning its result (if any).
+sub txn_do( $, $coderef, @coderef_args ) {
+    return instance()->storage->txn_do($coderef, @coderef_args);
+}
+
+=head2 txn_begin
+
+    YourCompany::DB->txn_begin;
+
+Starts a transaction.
+
+Note that L</txn_do> is preferred method.
+
+=cut
+
+# Starts a transaction.
+sub txn_begin( $ ) {
+    return instance()->storage->txn_begin;
+}
+
+=head2 txn_commit
+
+    YourCompany::DB->txn_commit;
+
+Issues a commit of the current transaction.
+
+Note that L</txn_do> is preferred method.
+
+=cut
+
+sub txn_commit( $ ) {
+    return instance()->storage->txn_commit;
+}
+
+=head2 txn_rollback
+
+    YourCompany::DB->txn_rollback;
+
+Issues a rollback of the current transaction. A nested rollback will throw a L<DBIx::Class::Storage::NESTED_ROLLBACK_EXCEPTION> exception, which allows the rollback to propagate to the outermost transaction.
+
+Note that L</txn_do> is preferred method.
+
+=cut
+
+sub txn_rollback( $ ) {
+    return instance()->storage->txn_rollback;
 }
 
 =head2 dbh_do
