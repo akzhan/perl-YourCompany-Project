@@ -33,7 +33,7 @@ describe "YourCompany::App::Controller::Project" => sub {
         it "should render empty list" => sub {
             $t->get_ok('/projects', $ACCEPT_HEADERS)
                 ->status_is(HTTP_OK)
-                ->json_is("", {
+                ->json_is({
                     status  => HTTP_OK,
                     success => true,
                     model   => [],
@@ -76,7 +76,7 @@ describe "YourCompany::App::Controller::Project" => sub {
             it "should render ok on created id" => sub {
                 $t->get_ok("/projects/$new_id")
                     ->status_is(HTTP_OK)
-                    ->json_is("", {
+                    ->json_is({
                         status  => HTTP_OK,
                         success => true,
                         model => {
@@ -92,7 +92,7 @@ describe "YourCompany::App::Controller::Project" => sub {
             it "should delete ok" => sub {
                 $t->delete_ok("/projects/$new_id")
                     ->status_is(HTTP_OK)
-                    ->json_is("", {
+                    ->json_is({
                         status  => HTTP_OK,
                         success => true,
                     });
