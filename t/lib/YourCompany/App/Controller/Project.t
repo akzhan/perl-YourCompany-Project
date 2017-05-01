@@ -4,6 +4,7 @@ use Test::Mojo;
 use Data::Fake qw( Names );
 use HTTP::Status qw( HTTP_OK HTTP_NOT_FOUND HTTP_CREATED );
 use Readonly;
+use Mojo::JSON qw( true false );
 
 use YourCompany::App;
 use YourCompany::DB;
@@ -32,10 +33,11 @@ describe "YourCompany::App::Controller::Project" => sub {
         it "should render empty list" => sub {
             $t->get_ok('/projects', $ACCEPT_HEADERS)
                 ->status_is(HTTP_OK)
-                ->json_is("/status", HTTP_OK)
-                ->json_is("/success", Mojo::JSON::true)
-                ->json_is("/model", [])
-                ;
+                ->json_is("", {
+                    status  => HTTP_OK,
+                    success => true,
+                    model   => [],
+                });
         };
     };
 
@@ -44,7 +46,7 @@ describe "YourCompany::App::Controller::Project" => sub {
             $t->get_ok("/projects/$WRONG_ID" => $ACCEPT_HEADERS)
                 ->status_is(HTTP_NOT_FOUND)
                 ->json_is("/status", HTTP_NOT_FOUND)
-                ->json_is("/success", Mojo::JSON::false)
+                ->json_is("/success", false)
                 ->json_has("/errors")
                 ->json_hasnt("/model")
                 ;
@@ -61,7 +63,7 @@ describe "YourCompany::App::Controller::Project" => sub {
                     title => $new_title,
                 })->status_is(HTTP_CREATED)
                     ->json_is("/status", HTTP_CREATED)
-                    ->json_is("/success", Mojo::JSON::true)
+                    ->json_is("/success", true)
                     ->json_hasnt("/errors")
                     ->json_is("/model/title", $new_title)
                     ->json_like("/model/id", qr/^\d+$/)
@@ -74,11 +76,14 @@ describe "YourCompany::App::Controller::Project" => sub {
             it "should render ok on created id" => sub {
                 $t->get_ok("/projects/$new_id")
                     ->status_is(HTTP_OK)
-                    ->json_is("/status", HTTP_OK)
-                    ->json_is("/success", Mojo::JSON::true)
-                    ->json_hasnt("/errors")
-                    ->json_is("/model/id", $new_id)
-                    ->json_is("/model/title", $new_title)
+                    ->json_is("", {
+                        status  => HTTP_OK,
+                        success => true,
+                        model => {
+                            id    => $new_id,
+                            title => $new_title,
+                        },
+                    })
                     ;
             };
         };
@@ -87,11 +92,10 @@ describe "YourCompany::App::Controller::Project" => sub {
             it "should delete ok" => sub {
                 $t->delete_ok("/projects/$new_id")
                     ->status_is(HTTP_OK)
-                    ->json_is("/status", HTTP_OK)
-                    ->json_is("/success", Mojo::JSON::true)
-                    ->json_hasnt("/errors")
-                    ->json_hasnt("/model")
-                    ;
+                    ->json_is("", {
+                        status  => HTTP_OK,
+                        success => true,
+                    });
             };
         };
 
