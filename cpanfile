@@ -29,6 +29,7 @@ on test => sub {
     requires "Test::More";
     requires "Test::Exception" => "0.43";
     requires "Test::Spec";
+    requires "Data::Fake";
 };
 
 on develop => sub {
