@@ -10,17 +10,25 @@ YourCompany::DB::Project
 
 =head1 DESCRIPTION
 
-проекты это наше все
+Represents C<projects> table.
 
 =cut
 
 use parent qw( YourCompany::Util::DBResult );
 
-=head1 TABLE: C<projects>
+__PACKAGE__->table("projects");
+
+=head1 COLUMNS
+
+=head2 id
+
+Identifier
+
+=head2 title
+
+Title
 
 =cut
-
-__PACKAGE__->table("projects");
 
 __PACKAGE__->add_columns(
     "id",
