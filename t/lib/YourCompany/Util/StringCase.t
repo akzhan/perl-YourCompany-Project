@@ -9,6 +9,10 @@ describe "YourCompany::Util::StringCase" => sub {
             dasherize
             humanize
             titleize
+            acronym
+            get_acronyms
+            set_acronyms
+            reset_acronyms
         );
     };
 
@@ -68,6 +72,44 @@ describe "YourCompany::Util::StringCase" => sub {
         }
     };
 
+
+    describe acronym => sub {
+        describe html_string => sub {
+            my $acronyms;
+
+            before all => sub {
+                reset_acronyms();
+            };
+
+            after all => sub {
+                reset_acronyms();
+            };
+
+            it "should camelize to HtmlString before acronym" => sub {
+                is camelize("html_string"), "HtmlString";
+            };
+
+            it "should get_acronyms" => sub {
+                lives_ok { $acronyms = get_acronyms(); } '';
+            };
+
+            it "should do acronym" => sub {
+                lives_ok { acronym("HTML") } '';
+            };
+
+            it "should camelize to HTMLString after acronym" => sub {
+                is camelize("html_string"), "HTMLString";
+            };
+
+            it "should set_acronyms" => sub {
+                lives_ok { set_acronyms($acronyms); } '';
+            };
+
+            it "should camelize to HtmlString after set_acronyms to initial state" => sub {
+                is camelize("html_string"), "HtmlString";
+            };
+        };
+    };
 };
 
 runtests unless caller;

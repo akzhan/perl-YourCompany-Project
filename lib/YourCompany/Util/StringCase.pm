@@ -189,6 +189,51 @@ sub titleize {
     $word;
 }
 
+=head2 get_acronyms
+
+    my $acromyms_to_save = get_acronyms;
+
+Gets copy of acronyms to be set later through L</set_acronyms>.
+
+=cut
+
+sub get_acronyms {
+    return { %acronyms };
+}
+
+=head2 set_acronyms
+
+    set_acronyms( $acromyms_to_set )
+
+Sets acronyms got earlier by L</get_acronyms>.
+
+=cut
+
+sub set_acronyms {
+    my $acronyms_to_set = $_[0];
+    %acronyms = %{ $acronyms_to_set };
+    if ( scalar %acronyms ) {
+        my $patt = join('|', map { "\Q$_\E" } values %acronyms);
+        $acronym_regex = qr/$patt/;
+    }
+    else {
+        $acronym_regex = qr/(?=a)b/;
+    }
+    1;
+}
+
+=head2 reset_acronyms
+
+    reset_acronyms
+
+Resets acronyms to empty set.
+
+=cut
+
+sub reset_acronyms {
+    set_acronyms({});
+}
+
 our @EXPORT_OK = qw(
     &acronym
     &camelize
@@ -197,6 +242,9 @@ our @EXPORT_OK = qw(
     &underscore
     &humanize
     &titleize
+    &get_acronyms
+    &set_acronyms
+    &reset_acronyms
 );
 
 1;
