@@ -105,7 +105,8 @@ and open [its swagger page](http://localhost:7777/swagger-ui/dist/index.html).
 
 ## CREDITS
 
- * All together to [@akzhan](http://akzhan.github.io/)
+ * All together to [@akzhan](https://akzhan.github.io/).
  * Database plan to [Max Travinichev](mailto:uatrigger@gmail.com) [@travinichev](https://github.com/travinichev).
  * Mojolicious application to [Vladimir Melnichenko](mailto:melnichenkovv@gmail.com).
  * find or throw pattern to Eugen Konkov [@KES777](https://github.com/KES777).
+ * Hint to aliasing of core functions to [Anton Petrusevich](http://search.cpan.org/~antonpetr/) [@jef-sure](https://github.com/jef-sure).
