@@ -38,8 +38,18 @@ and will convert the acronym into a non-delimited single lowercase word when pas
 sub acronym {
     my $word = $_[0];
     $acronyms{lc $word} = $word;
-    my $patt = join('|', map { quotemeta } values %acronyms);
-    $acronym_regex = qr/$patt/;
+    _setup_acronym_regex();
+}
+
+sub _setup_acronym_regex {
+    if ( scalar %acronyms ) {
+        my $patt = join('|', map { quotemeta } values %acronyms);
+        $acronym_regex = qr/$patt/;
+    }
+    else {
+        $acronym_regex = qr/(?=a)b/;
+    }
+    1;
 }
 
 =head2 capitalize
@@ -212,14 +222,7 @@ Sets acronyms got earlier by L</get_acronyms>.
 sub set_acronyms {
     my $acronyms_to_set = $_[0];
     %acronyms = %{ $acronyms_to_set };
-    if ( scalar %acronyms ) {
-        my $patt = join('|', map { quotemeta } values %acronyms);
-        $acronym_regex = qr/$patt/;
-    }
-    else {
-        $acronym_regex = qr/(?=a)b/;
-    }
-    1;
+    _setup_acronym_regex();
 }
 
 =head2 reset_acronyms
