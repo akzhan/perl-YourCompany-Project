@@ -38,7 +38,7 @@ and will convert the acronym into a non-delimited single lowercase word when pas
 sub acronym {
     my $word = $_[0];
     $acronyms{lc $word} = $word;
-    my $patt = join('|', values %acronyms);
+    my $patt = join('|', map { "\Q$_\E" } values %acronyms);
     $acronym_regex = qr/$patt/;
 }
 
