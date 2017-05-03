@@ -4,7 +4,9 @@ Modern Web project in Perl using [Mojolicious](http://mojolicious.org/) and [DBI
 
 "/api" route also provides implementation of [OpenAPI](https://www.openapis.org/) protocol.
 
-Some configuration settings like database ones embedded to reduce the learning curve.
+Local configuration settings were embedded into the repository to reduce the learning curve.
+
+This application respond to `/projects` route only (see `bin/cli routes` for details).
 
 ## Installation
 
@@ -44,7 +46,7 @@ sqitch config --user user.email 'email@example.com'
 
 ## Configuration
 
-Usually You need to override *config/defaults.yml* with *config/local.yml* and exclude latest from VCS tracking.
+Usually You need to override *config/defaults.yml*, *config/development.yml*, *config/test.yml*, *config/production.yml* with *config/local.yml* and exclude local settings from VCS tracking.
 
 ## Usage
 
@@ -103,6 +105,7 @@ and open [its swagger page](http://localhost:7777/swagger-ui/dist/index.html).
 
 ## CREDITS
 
+ * All together to [@akzhan](http://akzhan.github.io/)
  * Database plan to [Max Travinichev](mailto:uatrigger@gmail.com) [@travinichev](https://github.com/travinichev).
  * Mojolicious application to [Vladimir Melnichenko](mailto:melnichenkovv@gmail.com).
  * find or throw pattern to Eugen Konkov [@KES777](https://github.com/KES777).
