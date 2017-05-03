@@ -54,9 +54,7 @@ This function is L</ucfirst> internally, but exists to made easy convertion from
 
 =cut
 
-sub capitalize {
-    ucfirst($_[0]);
-}
+*{capitalize} = \&CORE::ucfirst;
 
 =head2 camelize
 
