@@ -2,11 +2,11 @@
 
 Modern Web project in Perl using [Mojolicious](http://mojolicious.org/) and [DBIx::Class](http://search.cpan.org/~ribasushi/DBIx-Class).
 
-"/api" route also provides implementation of [OpenAPI](https://www.openapis.org/) protocol.
-
 Local configuration settings were embedded into the repository to reduce the learning curve.
 
-This application respond to `/projects` route only (see `bin/cli routes` for details).
+This application respond to `/projects` and `/api/projects` routes only (see `bin/cli routes` for details).
+
+`/api/projects` route also provides implementation of [OpenAPI](https://www.openapis.org/) protocol.
 
 ## Installation
 
