@@ -16,8 +16,12 @@ use YourCompany::Perl::UTF8;
 
 use Exporter qw( import );
 
+use constant {
+    NO_MATCH_RE => qr/(?=a)b/,
+};
+
 my %acronyms = ();
-my $acronym_regex = qr/(?=a)b/;
+my $acronym_regex = NO_MATCH_RE;
 
 =head1 FUNCTIONS
 
@@ -47,7 +51,7 @@ sub _setup_acronym_regex {
         $acronym_regex = qr/$patt/;
     }
     else {
-        $acronym_regex = qr/(?=a)b/;
+        $acronym_regex = NO_MATCH_RE;
     }
     1;
 }
