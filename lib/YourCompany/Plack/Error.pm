@@ -22,7 +22,6 @@ use YourCompany::Perl::UTF8;
 use HTTP::Status qw( HTTP_INTERNAL_SERVER_ERROR );
 use Scalar::Util qw( blessed );
 use Mojo::JSON qw( encode_json false );
-use Exporter ();
 
 use overload '""' => 'stringify';
 use overload 'ne' => 'not_equal';
