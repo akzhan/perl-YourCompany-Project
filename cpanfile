@@ -13,7 +13,9 @@ requires "List::Util" => "1.33";
 requires "Readonly";
 requires "Scalar::Util";
 requires "YAML::Syck";
+requires "constant";
 requires "lib::abs" => "0.93";
+requires "mro";
 
 # Postgres!
 requires "DBD::Pg";
