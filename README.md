@@ -1,4 +1,4 @@
-# YourCompany Project in Perl [![Build Status](https://travis-ci.org/akzhan/perl-YourCompany-Project.png?branch=master)](https://travis-ci.org/akzhan/perl-YourCompany-Project) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# YourCompany Project in Perl [![Build Status](https://travis-ci.org/akzhan/perl-YourCompany-Project.svg?branch=master)](https://travis-ci.org/akzhan/perl-YourCompany-Project) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Modern Web project in Perl using [Mojolicious](http://mojolicious.org/) and [DBIx::Class](http://search.cpan.org/~ribasushi/DBIx-Class).
 
