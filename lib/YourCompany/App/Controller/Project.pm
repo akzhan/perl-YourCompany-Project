@@ -14,7 +14,7 @@ sub index( $self ) { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
     } );
 }
 
-sub single( $self ) { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
+sub single( $self ) {
     my $id = ''. $self->param('id');
 
     return $self->render( json => {
