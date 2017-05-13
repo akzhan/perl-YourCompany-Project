@@ -2,7 +2,7 @@ package YourCompany::App::Controller::Todo;
 
 use YourCompany::Perl::UTF8;
 
-use HTTP::Status qw( HTTP_CREATED );
+use HTTP::Status qw( HTTP_CREATED HTTP_NO_CONTENT );
 
 use parent 'YourCompany::App::Controller';
 
@@ -55,13 +55,13 @@ sub delete( $self ) { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
 
     $self->model->delete($id);
 
-    return $self->render( text => '' );
+    return $self->render( text => '', status => HTTP_NO_CONTENT );
 }
 
 sub delete_all( $self ) {
     $self->model->delete_all;
 
-    return $self->render( text => '' );
+    return $self->render( text => '', status => HTTP_NO_CONTENT );
 }
 
 1;
