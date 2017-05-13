@@ -12,6 +12,16 @@ sub collect( $class, $routes ) {
     $projects->post('/')->to('#create');
     $projects->put( '/:id' => [ id => qr/\d+/ ] )->to('#update');
     $projects->delete( '/:id' => [ id => qr/\d+/ ] )->to('#delete');
+
+    # Todo-Backend API (http://www.todobackend.com/)
+    my $todos = $routes->any('/todos')->to( controller => 'todo' );
+
+    $todos->get('/')->to('#index');
+    $todos->get( '/:id' => [ id => qr/\d+/ ] )->to('#single')->name('todo_url');
+    $todos->post('/')->to('#create');
+    $todos->patch( '/:id' => [ id => qr/\d+/ ] )->to('#update');
+    $todos->delete( '/:id' => [ id => qr/\d+/ ] )->to('#delete');
+    $todos->delete('/')->to('#delete_all');
 }
 
 1;

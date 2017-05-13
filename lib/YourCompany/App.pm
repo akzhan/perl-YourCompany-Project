@@ -32,8 +32,6 @@ sub startup( $self ) {
     # Documentation browser under "/perldoc"
     $self->plugin('PODRenderer');
 
-    $self->plugin('CORS');
-
     $self->plugin('Model' => {
         namespaces => [
             'YourCompany::App::Model',

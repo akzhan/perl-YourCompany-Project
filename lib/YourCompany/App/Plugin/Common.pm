@@ -83,7 +83,7 @@ sub register( $self, $app, @args ) {
 
         $c->res->headers->header( 'Access-Control-Allow-Origin' => '*' );
         $c->res->headers->header( 'Access-Control-Allow-Credentials' => 'true' );
-        $c->res->headers->header( 'Access-Control-Allow-Methods' => 'GET, OPTIONS, POST, DELETE, PUT' );
+        $c->res->headers->header( 'Access-Control-Allow-Methods' => 'GET, OPTIONS, POST, DELETE, PUT, PATCH' );
         $c->res->headers->header( 'Access-Control-Allow-Headers' => 'Content-Type' );
         $c->res->headers->header( 'Access-Control-Max-Age' => '1728000' );
     } );

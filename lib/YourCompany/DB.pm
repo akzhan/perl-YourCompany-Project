@@ -44,7 +44,11 @@ sub instance {
         "dbi:Pg:dbname=". YourCompany::Config->database->{name}. ";host=$host",
         YourCompany::Config->database->{user},
         YourCompany::Config->database->{password},
-        { pg_enable_utf8 => 1},
+        {
+            quote_char     => '"',
+            name_sep       => '.',
+            pg_enable_utf8 => 1,
+        },
     );
 }
 
