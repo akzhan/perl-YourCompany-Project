@@ -23,7 +23,6 @@ sub list( $self ) {
 }
 
 sub single( $self, $id ) {
-    # explicit transaction is unnecessary here, but for solid expirience
     return $self->txn_do(sub {
         my $todo = $self->find_or_throw( $id );
         $todo;
@@ -43,7 +42,7 @@ sub create( $self, $fields ) {
 sub update( $self, $id, $fields ) {
     return $self->txn_do(sub {
         if ( exists($fields->{id}) && ( $fields->{id} != $id ) ) {
-            YourCompany::Plack::Error->bad_request( "Project cannot change id from ". $fields->{id}. " to  $id" );
+            YourCompany::Plack::Error->bad_request( "Todo cannot change id from ". $fields->{id}. " to  $id" );
         }
 
         my $todo = $self->find_or_throw( $id );
