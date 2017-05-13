@@ -34,7 +34,7 @@ sub startup( $self ) {
 
     $self->plugin('Model' => {
         namespaces => [
-            'YourCompany::Model',
+            'YourCompany::App::Model',
         ],
     });
 

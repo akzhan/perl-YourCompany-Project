@@ -1,10 +1,10 @@
-package YourCompany::Model::Project;
+package YourCompany::App::Model::Project;
 
 =encoding utf-8
 
 =head1 NAME
 
-YourCompany::Model::Project
+YourCompany::App::Model::Project
 
 =cut
 
@@ -12,10 +12,9 @@ use YourCompany::Perl::UTF8;
 
 use YourCompany::Plack::Error;
 
-use parent qw( YourCompany::DBModel );
+use parent qw( YourCompany::App::DBModel );
 
 sub list( $self ) {
-    # $self->log->info('woe');
     return $self->txn_do(sub {
         return [
             $self->rs->all,

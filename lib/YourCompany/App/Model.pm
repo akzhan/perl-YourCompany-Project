@@ -1,10 +1,10 @@
-package YourCompany::Model;
+package YourCompany::App::Model;
 
 =encoding utf-8
 
 =head1 NAME
 
-YourCompany::Model
+YourCompany::App::Model
 
 =head1 DESCRIPTION
 

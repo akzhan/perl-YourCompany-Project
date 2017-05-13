@@ -1,20 +1,20 @@
-package YourCompany::DBModel;
+package YourCompany::App::DBModel;
 
 =encoding utf-8
 
 =head1 NAME
 
-YourCompany::DBModel
+YourCompany::App::DBModel
 
 =head1 DESCRIPTION
 
-Base L<YourCompany::DB> related L<YourCompany::Model> class.
+Base L<YourCompany::DB> related L<YourCompany::App::Model> class.
 
 =cut
 
 use YourCompany::Perl::UTF8;
 
-use parent 'YourCompany::Model';
+use parent 'YourCompany::App::Model';
 
 use YourCompany::Plack::Error;
 use YourCompany::DB;
