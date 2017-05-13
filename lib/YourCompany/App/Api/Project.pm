@@ -17,7 +17,7 @@ sub index { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
     } );
 }
 
-sub single { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
+sub single {
     my $self = shift->openapi->valid_input or return;
 
     my $id = $self->validation->param("id");
