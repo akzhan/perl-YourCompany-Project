@@ -24,6 +24,7 @@ requires "App::Sqitch" => "0.9994";
 
 # Mojo based Perl project
 requires "Mojolicious" => "7.30";
+requires "Mojolicious::Plugin::CORS";
 requires "Mojolicious::Plugin::Model";
 requires "Mojolicious::Plugin::OpenAPI" => "1.13";
 requires "Starman";
