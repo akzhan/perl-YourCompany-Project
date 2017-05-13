@@ -4,7 +4,8 @@ Modern Web project in Perl using [Mojolicious](http://mojolicious.org/) and [DBI
 
 Local configuration settings were embedded into the repository to reduce the learning curve.
 
-This application respond to `/projects` and `/api/projects` routes only (see `bin/cli routes` for details).
+This application respond to `/projects` and `/api/projects` routes (see `bin/cli routes` for details).
+Also application respond to `/todos` routes of [Todo Backend example](http://todobackend.com/).
 
 `/api/projects` route also provides implementation of [OpenAPI](https://www.openapis.org/) protocol.
 
