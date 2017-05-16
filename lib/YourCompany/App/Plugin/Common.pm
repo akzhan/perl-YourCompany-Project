@@ -44,6 +44,7 @@ use YourCompany::Perl::UTF8;
 
 use HTTP::Status qw( HTTP_INTERNAL_SERVER_ERROR );
 use Scalar::Util qw( blessed );
+use Mojo::JSON qw( false );
 
 use YourCompany::Config;
 use YourCompany::Plack::Error;
@@ -71,7 +72,7 @@ sub register( $self, $app, @args ) {
         }
 
         return $c->render( status => HTTP_INTERNAL_SERVER_ERROR, json => {
-            success => \0,
+            success => false,
             status  => HTTP_INTERNAL_SERVER_ERROR,
             errors  => [ "$exception" ],
         });

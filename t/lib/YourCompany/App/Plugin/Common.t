@@ -13,7 +13,7 @@ use YourCompany::Test::UTF8;
 }
 
 use Mojolicious;
-use Mojo::JSON qw( decode_json );
+use Mojo::JSON qw( decode_json false );
 use Test::Mojo;
 use HTTP::Status qw( HTTP_NOT_FOUND HTTP_INTERNAL_SERVER_ERROR );
 
@@ -52,7 +52,7 @@ describe "YourCompany::App::Plugin::Common" => sub {
             is_deeply $json, {
                 errors  => [ 'err' ],
                 status  => HTTP_NOT_FOUND,
-                success => \0,
+                success => false,
             };
             is $c->res->code, HTTP_NOT_FOUND;
         };
@@ -69,7 +69,7 @@ describe "YourCompany::App::Plugin::Common" => sub {
             is_deeply $json, {
                 errors  => [ 'hm' ],
                 status  => HTTP_INTERNAL_SERVER_ERROR,
-                success => \0,
+                success => false,
             };
             is $c->res->code, HTTP_INTERNAL_SERVER_ERROR;
         };
