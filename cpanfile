@@ -36,6 +36,7 @@ on test => sub {
 };
 
 on develop => sub {
+    requires "Devel::Cover";
     requires "Devel::REPL";
     requires "Devel::NYTProf";
     requires "Perl::Critic";

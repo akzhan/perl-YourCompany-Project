@@ -14,6 +14,10 @@ addons:
 before_script:
   - psql -c "CREATE DATABASE yourdatabase ENCODING=utf8;" -U postgres
   - sqitch deploy --target travis
+  - cpanm --quiet --notest --skip-satisfied Devel::Cover::Report::Codecov
 env:
   - MOJO_MODE=travis
-script: prove -r t
+script:
+  - HARNESS_PERL_SWITCHES="-MDevel::Cover=+ignore,^local/|^t/" prove -r t
+after_success:
+  - cover -report codecov
