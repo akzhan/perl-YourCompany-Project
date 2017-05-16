@@ -72,6 +72,11 @@ describe "YourCompany::Util::StringCase" => sub {
         }
     };
 
+    describe dasherize => sub {
+        it "shoult replace '_' with '-'" => sub {
+            is dasherize("that_do__you_think___"), "that-do--you-think---";
+        };
+    };
 
     describe acronym => sub {
         describe html_string => sub {
