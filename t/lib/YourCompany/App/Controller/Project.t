@@ -56,6 +56,7 @@ describe "YourCompany::App::Controller::Project" => sub {
 
     context "project lifecycle" => sub {
         my $new_title = fake_name->();
+        my $updated_title = fake_name->();
         my $new_id;
 
         describe post => sub {
@@ -83,6 +84,40 @@ describe "YourCompany::App::Controller::Project" => sub {
                         model => {
                             id    => $new_id,
                             title => $new_title,
+                        },
+                    })
+                    ;
+            };
+        };
+
+        describe "update project" => sub {
+            it "should render ok on update" => sub {
+                $t->put_ok("/projects/$new_id" => json => {
+                    title => $updated_title,
+                })
+                    ->status_is(HTTP_OK)
+                    ->json_is({
+                        status  => HTTP_OK,
+                        success => true,
+                        model => {
+                            id    => $new_id,
+                            title => $updated_title,
+                        },
+                    })
+                    ;
+            };
+        };
+
+        describe "get updated project" => sub {
+            it "should render ok on updated id" => sub {
+                $t->get_ok("/projects/$new_id")
+                    ->status_is(HTTP_OK)
+                    ->json_is({
+                        status  => HTTP_OK,
+                        success => true,
+                        model => {
+                            id    => $new_id,
+                            title => $updated_title,
                         },
                     })
                     ;
