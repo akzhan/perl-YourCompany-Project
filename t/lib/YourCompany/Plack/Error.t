@@ -1,6 +1,7 @@
 use YourCompany::Test::UTF8;
 
 use HTTP::Status qw( HTTP_INTERNAL_SERVER_ERROR HTTP_NOT_FOUND );
+use Mojo::JSON qw( false );
 
 describe "YourCompany::Plack::Error" => sub {
     before all => sub {
@@ -53,7 +54,7 @@ describe "YourCompany::Plack::Error" => sub {
                 is_deeply \%render_data, {
                     status => HTTP_INTERNAL_SERVER_ERROR,
                     json   => {
-                        success => \0,
+                        success => false,
                         status  => HTTP_INTERNAL_SERVER_ERROR,
                         errors  => [ qw( oh my god ) ],
                     },
