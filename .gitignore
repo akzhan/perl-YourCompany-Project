@@ -3,4 +3,4 @@
 pod2htmd.tmp
 .vstags
 /.cpan/
-
+/cover_db/
