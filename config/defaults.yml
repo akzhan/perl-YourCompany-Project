@@ -7,6 +7,11 @@ app:
   workers: 1
   backlog: 128
 database:
+  host: localhost
   name: yourdatabase
   user: yourself
   password: secured
+  dbi_attributes:
+    quote_char: '"'
+    name_sep: '.'
+    pg_enable_utf8: 1

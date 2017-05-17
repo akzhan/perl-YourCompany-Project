@@ -39,16 +39,12 @@ sub instance {
         $schema = undef;
         $work_pid = $pid;
     }
-    my $host = YourCompany::Config->database->{host} // 'localhost';
+    state $dbcfg = YourCompany::Config->database;
     return $schema //= __PACKAGE__->connect(
-        "dbi:Pg:dbname=". YourCompany::Config->database->{name}. ";host=$host",
-        YourCompany::Config->database->{user},
-        YourCompany::Config->database->{password},
-        {
-            quote_char     => '"',
-            name_sep       => '.',
-            pg_enable_utf8 => 1,
-        },
+        "dbi:Pg:dbname=$dbcfg->{name};host=$dbcfg->{host}",
+        $dbcfg->{user},
+        $dbcfg->{password},
+        $dbcfg->{dbi_attributes},
     );
 }
 
