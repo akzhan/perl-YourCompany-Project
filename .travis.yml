@@ -9,6 +9,7 @@ perl:
   - "5.24"
 services:
   - postgresql
+  - redis-server
 addons:
   postgresql: "9.6"
 before_script:
