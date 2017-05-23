@@ -1,5 +1,44 @@
 package YourCompany::Util::Redis;
 
+=head1 NAME
+
+YourCompany::Util::Redis
+
+=head1 DESCRIPTION
+
+L<Redis::Fast>/L<Redis> child class that configured through L<YourCompany::Config>.
+
+It exports all known configurations like
+
+    YourCompany::Util::Redis->config_key # it is singleton.
+
+or
+
+    use YourCompany::Util::Redis qw( r_config_key ); # r_config_key() is singleton
+
+=head1 SYNOPSYS
+
+Define Redis config:
+
+    redis:
+      default:
+        host: localhost
+        port: 6379
+        index: 777
+        reconnect: 1
+
+And now use
+
+    use YourCompany::Util::Redis qw( r_default );
+
+    r_default->get( "key" );
+
+    YourCompany::Util::Redis->default->set( "key", "value" );
+
+    my $another_instance = YourCompany::Util::Redis->new( config );
+
+=cut
+
 use YourCompany::Perl::UTF8;
 
 use Exporter qw( import );
