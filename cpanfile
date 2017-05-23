@@ -17,6 +17,9 @@ requires "constant";
 requires "lib::abs" => "0.93";
 requires "mro";
 
+# Redis just for example of use YourCompany::Util::Redis
+requires "Redis::Fast" => "0.20";
+
 # Postgres!
 requires "DBD::Pg";
 requires "DBIx::Class";
