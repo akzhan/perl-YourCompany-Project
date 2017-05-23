@@ -35,7 +35,8 @@ And now use
 
     YourCompany::Util::Redis->default->set( "key", "value" );
 
-    my $another_instance = YourCompany::Util::Redis->new( config );
+    my $another_instance = YourCompany::Util::Redis->new_r( "default" );
+    my $other_instance   = YourCompany::Util::Redis->new( config );
 
 =cut
 
@@ -56,6 +57,16 @@ BEGIN { # Parent is Redis::Fast; otherwise Redis.
         parent->import( 'Redis' );
     };
 }
+
+=head1 METHODS
+
+=head2 new_r
+
+    YourCompany::Util::Redis->new_r( "default" );
+
+Creates new Redis client instance based on specified redis configuration.
+
+=cut
 
 sub new_r {
     my ( $class, $key ) = @_;
