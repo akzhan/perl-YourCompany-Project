@@ -57,8 +57,6 @@ BEGIN { # Parent is Redis::Fast; otherwise Redis.
     };
 }
 
-our @EXPORT_OK;
-
 sub new_r {
     my ( $class, $key ) = @_;
 
@@ -77,6 +75,8 @@ sub new_r {
         $instance;
     };
 }
+
+our @EXPORT_OK;
 
 BEGIN {
     my $config = eval { YourCompany::Config->redis } // {};
