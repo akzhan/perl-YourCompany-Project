@@ -92,24 +92,29 @@ describe "YourCompany::Plack::Error" => sub {
     };
 
 
-    describe not_found => sub {
-        my $err;
+    for my $thrower (qw( not_found bad_request internal_server_error )) {
+        describe $thrower => sub {
+            my $err;
+            no strict 'refs'; ## no critic (TestingAndDebugging::ProhibitNoStrict)
+            my $code = ("HTTP::Status::HTTP_". ($thrower =~ s/^(.+)$/\U$1\E/r))->();
+            use strict 'refs';
 
-        it "dies" => sub {
-            throws_ok {
-                YourCompany::Plack::Error->not_found("wow");
-            } "YourCompany::Plack::Error", "";
-            $err = $@;
-        };
+            it "dies" => sub {
+                throws_ok {
+                    YourCompany::Plack::Error->$thrower("wow");
+                } "YourCompany::Plack::Error", "";
+                $err = $@;
+            };
 
-        it "with HTTP_NOT_FOUND code" => sub {
-            is $err->code, HTTP_NOT_FOUND;
-        };
+            it "with $code code" => sub {
+                is $err->code, $code;
+            };
 
-        it "and expected message" => sub {
-            is $err->message, "wow";
+            it "and expected message" => sub {
+                is $err->message, "wow";
+            };
         };
-    };
+    }
 };
 
 runtests  unless caller;
