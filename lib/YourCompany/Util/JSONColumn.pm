@@ -20,11 +20,11 @@ sub register_column {
 
     my $jsoner = JSON::XS->new;
     for my $mod ( keys %modifiers ) {
-        my $args = $modifiers{$mod};
-        if ( ref($args) ne 'ARRAY' ) {
-            $args = [ $args ];
+        my $mod_args = $modifiers{$mod};
+        if ( ref($mod_args) ne 'ARRAY' ) {
+            $mod_args = [ $mod_args ];
         }
-        $jsoner = $jsoner->$mod( @{ $args } );
+        $jsoner = $jsoner->$mod( @{ $mod_args } );
     }
 
     my $unfreezer = sub {
