@@ -83,12 +83,12 @@ sub find_or_throw( $self, $id, $attr = {} ) {
             'me.id' => $id,
         }, $attr);
 
-        my $record = $attr->{prefetch} ? $rs->first : $rs->single;
+        my $row = $attr->{prefetch} ? $rs->first : $rs->single;
 
         YourCompany::Plack::Error->not_found( $self->resultset_name. " not found: $id" )
-            unless $record;
+            unless $row;
 
-        return $record;
+        return $row;
     });
 }
 
