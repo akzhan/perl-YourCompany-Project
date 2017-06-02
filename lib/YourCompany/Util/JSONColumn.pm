@@ -7,7 +7,7 @@ use Encode qw( encode_utf8 decode_utf8 );
 
 sub register_column {
     my $self = shift;
-    my ( $column, $info, $args ) = @_;
+    my ( $column, $info ) = @_;
     $self->next::method(@_);
 
     return unless defined $info->{json};

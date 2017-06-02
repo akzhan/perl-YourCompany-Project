@@ -6,7 +6,7 @@ use Mojo::JSON qw( true false );
 
 sub register_column {
     my $self = shift;
-    my ( $column, $info, $args ) = @_;
+    my ( $column, $info ) = @_;
     $self->next::method(@_);
 
     return unless $info->{bool} || $info->{boolean};
