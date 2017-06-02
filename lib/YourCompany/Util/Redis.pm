@@ -64,13 +64,11 @@ BEGIN { # Parent is Redis::Fast; otherwise Redis.
 
     YourCompany::Util::Redis->new_r( "default" );
 
-Creates new Redis client instance singleton method based on specified redis configuration.
+Creates new Redis client singleton method based on specified redis configuration.
 
 =cut
 
-sub new_r {
-    my ( $class, $key ) = @_;
-
+sub new_r( $class, $key ) {
     my $settings = YourCompany::Config->redis->{$key};
 
     return sub {
