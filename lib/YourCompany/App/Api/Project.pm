@@ -7,7 +7,7 @@ use Mojo::JSON qw( true );
 
 use parent 'YourCompany::App::Controller';
 
-sub index { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
+sub index {
     my $self = shift->openapi->valid_input or return;
 
     return $self->render( openapi => {
