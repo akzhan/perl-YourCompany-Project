@@ -28,7 +28,7 @@ The logging layer of your model, defaults to a L<Mojo/log> object.
 
 =cut
 
-sub log( $self ) {
+sub log( $self ) { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
     return $self->app->log;
 }
 
