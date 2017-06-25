@@ -19,7 +19,7 @@ requires "mro";
 
 # Redis just for example of use YourCompany::Util::Redis
 requires "Redis::Fast" => "0.20";
-requires "Plack::Session::Store::RedisFast" => "0.01";
+requires "Plack::Session::Store::RedisFast" => "0.04";
 
 # Postgres!
 requires "DBD::Pg";
