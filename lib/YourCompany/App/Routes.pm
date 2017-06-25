@@ -2,8 +2,8 @@ package YourCompany::App::Routes;
 
 use YourCompany::Perl::UTF8;
 
-sub collect( $class, $routes ) {
-    $routes->options('*')->to( 'cors#options' );
+sub collect ( $class, $routes ) {
+    $routes->options('*')->to('cors#options');
 
     my $projects = $routes->any('/projects')->to( controller => 'project' );
 

@@ -6,30 +6,26 @@ use HTTP::Status qw( HTTP_CREATED HTTP_NO_CONTENT );
 
 use parent 'YourCompany::App::Controller';
 
-sub _row_to_json( $self, $row ) {
+sub _row_to_json ( $self, $row ) {
     my $json = $row->TO_JSON;
 
     my $url = $self->url_for( 'todo_url', id => $row->id );
-
     $json->{url} = $url->to_abs;
 
     return $json;
 }
 
-sub index( $self ) { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
+sub index( $self ) {    ## no critic (Subroutines::ProhibitBuiltinHomonyms)
     return $self->render(
-        json => [
-            map { $self->_row_to_json($_) } @{ $self->model->list() },
-        ],
+        json => [ map { $self->_row_to_json($_) } @{ $self->model->list() }, ],
     );
 }
 
 sub single( $self ) {
-    my $id = ''. $self->param('id');
+    my $id = '' . $self->param('id');
 
     return $self->render(
-        json => $self->_row_to_json( $self->model->single($id) ),
-    );
+        json => $self->_row_to_json( $self->model->single($id) ), );
 }
 
 sub create( $self ) {
@@ -42,16 +38,15 @@ sub create( $self ) {
 }
 
 sub update( $self ) {
-    my $id     = ''. $self->param('id');
+    my $id     = '' . $self->param('id');
     my $fields = $self->req->json;
 
     return $self->render(
-        json => $self->_row_to_json( $self->model->update( $id, $fields ) ),
-    );
+        json => $self->_row_to_json( $self->model->update( $id, $fields ) ), );
 }
 
-sub delete( $self ) { ## no critic (Subroutines::ProhibitBuiltinHomonyms)
-    my $id = ''. $self->param('id');
+sub delete( $self ) {    ## no critic (Subroutines::ProhibitBuiltinHomonyms)
+    my $id = '' . $self->param('id');
 
     $self->model->delete($id);
 
