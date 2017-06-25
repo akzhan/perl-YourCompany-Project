@@ -6,6 +6,8 @@ app:
   port: 7777
   workers: 1
   backlog: 128
+  session:
+    expires: 2419200 # 4 weeks
 database:
   host: localhost
   name: yourdatabase
@@ -20,3 +22,7 @@ redis:
     host: localhost
     port: 6379
     index: 1
+  session:
+    host: localhost
+    port: 6379
+    index: 2
